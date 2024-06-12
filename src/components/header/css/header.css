@@ -1,0 +1,39 @@
+.header {
+  width: 100%;
+  height: 6.2rem;
+  background-color: #00000050;
+
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  padding: 0 15rem;
+
+  animation: onLanding 1.5s;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  font-size: 2rem;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes onLanding {
+  0% {
+    transform: translateY(-70px);
+    opacity: 0;
+  }
+  75% {
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
