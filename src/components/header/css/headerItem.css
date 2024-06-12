@@ -1,0 +1,31 @@
+.headerItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.headerItem > .underBar {
+  margin-top: 0.5rem;
+  background-color: grey;
+  border-radius: 25px;
+  height: 0.5rem;
+  width: 100%;
+  transition: 0.5s;
+}
+
+.headerItem:hover > .underBar {
+  background-color: #CBD3FF;
+}
+
+.headerItem > a {
+  font-weight: bold;
+  padding: 1rem 1.8rem;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.headerItem:hover > a {
+  color: #CBD3FF;
+  background-color: rgba(255, 255, 255, 0.3);
+}
