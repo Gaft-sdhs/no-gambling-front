@@ -1,6 +1,7 @@
 import "./css/slider.css";
 import SliderItem from "./SliderItem";
 import Arrow from "./Arrow";
+import Dots from "./Dots";
 
 const Slider = () => {
   return (
@@ -19,6 +20,7 @@ const Slider = () => {
           left: "100%",
         }}
       />
+      <Dots />
     </div>
   );
 };

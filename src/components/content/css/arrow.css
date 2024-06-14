@@ -14,7 +14,7 @@ cursor: pointer;
   display: inline-block;
   position: absolute;
   width: 2.5rem;
-  height: 0.4rem;
+  height: 0.5rem;
   background-color: white;
   border-radius: 15px;
 }
@@ -22,11 +22,11 @@ cursor: pointer;
 .arrow > .top {
   top: 0;
   left: 0;
-  transform: rotate(320deg) translateY(13px);
+  transform: rotate(320deg) translateY(12px);
 }
 
 .arrow > .bottom {
   bottom: 0;
   left: 0;
-  transform: rotate(40deg) translateY(-13px);
+  transform: rotate(40deg) translateY(-12px);
 }
