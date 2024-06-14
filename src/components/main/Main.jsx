@@ -2,7 +2,7 @@ import "./css/content.css"
 import Slider from "./Sliders";
 import Ranking from "./Ranking";
 
-const Content = ()=>{
+const Main = ()=>{
   return (
     <main className="index">
       <section className="container">
@@ -12,4 +12,4 @@ const Content = ()=>{
     </main>
   )
 }
-export default Content;
+export default Main;

@@ -10,10 +10,10 @@ const Header = () => {
           <Logo />
         </div>
         <div className="nav">
-          <HeaderItem name={"달팽이"} />
-          <HeaderItem name={"홀짝"} />
-          <HeaderItem name={"사다리"} />
-          <HeaderItem name={"충전"} />
+          <HeaderItem name={"달팽이"} link={"/snail"}/>
+          <HeaderItem name={"홀짝"} link={"/sniffling"}/>
+          <HeaderItem name={"사다리"} link={"/ladder"}/>
+          <HeaderItem name={"충전"} link={"/store"}/>
         </div>
       </header>
       <Banners />
