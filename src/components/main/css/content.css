@@ -1,0 +1,15 @@
+.index {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.index > .container {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  margin-top: 3rem;
+  gap: 6rem;
+}
+  

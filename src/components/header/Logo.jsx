@@ -1,6 +1,6 @@
 const Logo = ()=>{
   return (
-    <a>
+    <a className="logo" href="/">
       <img src="/pageLogo.png" alt="logo" />
     </a>
   )

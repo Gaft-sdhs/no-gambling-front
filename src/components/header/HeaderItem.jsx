@@ -1,8 +1,8 @@
 import "./css/headerItem.css";
-const HeaderItem = ({ name }) => {
+const HeaderItem = ({ name, link }) => {
   return (
     <div className="headerItem">
-      <a href="#none">{name}</a>
+      <a href={link}>{name}</a>
       <span className="underBar"></span>
     </div> 
   );
