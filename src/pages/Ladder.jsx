@@ -1,8 +1,9 @@
-const Ladder = ()=>{
+const Ladder = () => {
   return (
     <div style={{color:"white"}}>
-      사다리 게임 하는 곳입니다.
+      사다리 게임
     </div>
   )
 }
+
 export default Ladder;

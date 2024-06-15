@@ -11,7 +11,6 @@ const Header = () => {
         </div>
         <div className="nav">
           <HeaderItem name={"달팽이"} link={"/snail"}/>
-          <HeaderItem name={"홀짝"} link={"/sniffling"}/>
           <HeaderItem name={"사다리"} link={"/ladder"}/>
           <HeaderItem name={"충전"} link={"/store"}/>
         </div>

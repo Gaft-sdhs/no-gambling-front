@@ -1,8 +1,16 @@
-import Main from "../components/main/Main";
+import "./css/index.css"
+import Ranking from "../components/main/Ranking";
+import Sliders from "../components/main/Sliders";
+
 
 const Index = ()=>{
   return (
-    <Main/>
+    <main className="index">
+      <section className="container">
+        <Sliders />
+        <Ranking />
+      </section>
+    </main>
   )
 }
 export default Index;
