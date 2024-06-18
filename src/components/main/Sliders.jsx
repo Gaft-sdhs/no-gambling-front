@@ -6,9 +6,11 @@ import Dots from "./Dots";
 const Slider = () => {
   return (
     <div className="sliderContainer">
-      <SliderItem sliderFile={"/slider01.png"} />
-      <SliderItem sliderFile={"/slider02.png"} />
-      <SliderItem sliderFile={"/slider03.png"} />
+      <div className="sliderWrap">
+        <SliderItem sliderFile={"/slider01.png"} />
+        <SliderItem sliderFile={"/slider02.png"} />
+        <SliderItem sliderFile={"/slider03.png"} />
+      </div>
       <Arrow
         id={"arrowLeft"}
         styleValue={{ transform: "translate(0, -50%) rotate(0deg)", left: "0" }}

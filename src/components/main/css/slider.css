@@ -1,16 +1,19 @@
 .sliderContainer {
-position: relative;
-
+  position: relative;
+/* 
   display: flex;
-  flex-direction: row;
+  flex-direction: row; */
 
   width: 47rem;
   height: 30rem;
-  background-color: aquamarine;
+  background-color: #CBD3FF;
+
   overflow: hidden;
 }
 
-.sliderContainer > img {
-  width: 100%;
+.sliderContainer > .sliderWrap {
+  display: flex;
+  flex-direction: row;
   height: 100%;
-} 
+  width: 300%;
+}
