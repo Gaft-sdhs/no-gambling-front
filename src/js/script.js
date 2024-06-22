@@ -17,7 +17,6 @@ window.onload = function () {
 
   const currentDots = () => {
     dotsReset();
-
     dots[currentIndex].classList.add("selected");
   }
 
@@ -39,7 +38,6 @@ window.onload = function () {
 
   const sliderAnimation = () => {
     currentIndex++;
-
     mainSliderActionRefresh();
   };
 

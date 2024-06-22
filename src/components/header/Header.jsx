@@ -12,6 +12,7 @@ const Header = () => {
         <div className="nav">
           <HeaderItem name={"달팽이"} link={"/snail"}/>
           <HeaderItem name={"사다리"} link={"/ladder"}/>
+          <HeaderItem name={"파워볼"} link={"/Powerball"}/>
           <HeaderItem name={"충전"} link={"/store"}/>
         </div>
       </header>

@@ -17,6 +17,8 @@
   flex-direction: row;
   gap: 4rem;
   font-size: 2rem;
+
+  min-width: 45.5rem;
 }
 
 .logo {
