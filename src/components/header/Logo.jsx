@@ -1,8 +1,12 @@
+import pageLogo from "../../assets/pageLogo.png";
+import { Link } from "react-router-dom";
+
 const Logo = ()=>{
+  console.log(pageLogo)
   return (
-    <a className="logo" href="/">
-      <img src="/pageLogo.png" alt="logo" />
-    </a>
+    <Link to={"/"} className="logo" >
+      <img src={pageLogo} alt="logo" />
+    </Link>
   )
 }
 export default Logo;

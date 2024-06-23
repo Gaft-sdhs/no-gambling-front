@@ -5,7 +5,7 @@ const HeaderItem = ({ name, link }) => {
     <div className="headerItem">
       <Link to={link}>{name}</Link>
       <span className="underBar"></span>
-    </div> 
+    </div>
   );
 };
 export default HeaderItem;
