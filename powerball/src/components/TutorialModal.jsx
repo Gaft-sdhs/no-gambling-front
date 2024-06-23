@@ -1,4 +1,4 @@
-const TutorialModal = ({ currentSlide, setCurrentSlide, setShowTutorialModal }) => {
+const TutorialModal = ({ currentSlide, setCurrentSlide, setShowTutorialModal, completeTutorial }) => {
   const slides = [
     {
       title: '게임에 오신 것을 환영합니다',
@@ -14,17 +14,22 @@ const TutorialModal = ({ currentSlide, setCurrentSlide, setShowTutorialModal }) 
     }
   ];
 
+  const handleCompleteTutorial = () => {
+    completeTutorial();
+    setShowTutorialModal(false);
+  };
+
   return (
     <div className="modal" style={{ display: 'flex' }}>
       <div className="modal-content">
-        <span className="close" onClick={() => setShowTutorialModal(false)}>&times;</span>
+        <span className="close" onClick={handleCompleteTutorial}>&times;</span>
         <div className="tutorial-slide active">
           <h2>{slides[currentSlide].title}</h2>
           <p>{slides[currentSlide].content}</p>
           {currentSlide < slides.length - 1 ? (
             <button className="bet-button" onClick={() => setCurrentSlide(currentSlide + 1)}>다음</button>
           ) : (
-            <button className="bet-button" onClick={() => setShowTutorialModal(false)}>완료</button>
+            <button className="bet-button" onClick={handleCompleteTutorial}>완료</button>
           )}
         </div>
       </div>
