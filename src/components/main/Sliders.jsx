@@ -7,8 +7,6 @@ import slider03 from "../../assets/slider03.png";
 import pageLogo from "../../assets/pageLogo.png";
 
 const Slider = () => {
-  console.log(slider01,slider02,slider03,pageLogo)
-
   return (
     <div className="sliderContainer">
       <div className="sliderWrap">
