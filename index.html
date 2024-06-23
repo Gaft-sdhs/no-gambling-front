@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게임 페이지</title>
+    <style>
+        :root {
+            font-size: 16px; /* 1rem = 16px */
+        }
+        body {
+            background-color: #161921;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.25rem; /* 20px */
+            border: 0.125rem solid #444; /* 2px */
+            border-radius: 0.625rem; /* 10px */
+            box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.5); /* 15px */
+            background-color: #161921;
+        }
+        .timer {
+            font-size: 1.5rem; /* 24px */
+            margin-bottom: 1.25rem; /* 20px */
+        }
+        .timer span {
+            color: #FF4136;
+        }
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.25rem; /* 20px */
+        }
+        .gambling-area {
+            width: 18.75rem; /* 300px */
+            height: 18.75rem; /* 300px */
+            background-color: #ffffff;
+            border: 0.125rem solid #444; /* 2px */
+            border-radius: 0.625rem; /* 10px */
+            margin-right: 1.25rem; /* 20px */
+            position: relative;
+        }
+        .gambling-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        .circle {
+            width: 3.75rem; /* 60px */
+            height: 3.75rem; /* 60px */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem; /* 24px */
+            color: white;
+            font-weight: bold;
+            margin: 0.625rem 0; /* 10px */
+            box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5); /* 10px */
+        }
+        .circle:nth-child(1) {
+            background-color: #2ECC40;
+        }
+        .circle:nth-child(2) {
+            background-color: #FF4136;
+        }
+        .circle:nth-child(3) {
+            background-color: #0074D9;
+        }
+        .circle:nth-child(4) {
+            background-color: #B10DC9;
+        }
+        .betting-area {
+            display: flex;
+            justify-content: center;
+            gap: 0.625rem; /* 10px */
+        }
+        .bottom-box {
+            width: 5rem; /* 80px */
+            height: 5rem; /* 80px */
+            border-radius: 0.625rem; /* 10px */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem; /* 24px */
+            color: white;
+            font-weight: bold;
+            background-color: #161921;
+            border: 0.125rem solid #444; /* 2px */
+            box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5); /* 10px */
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            user-select: none;
+        }
+        .bottom-box:nth-child(1) {
+            background-color: #FF4136;
+        }
+        .bottom-box:nth-child(2) {
+            background-color: #0074D9;
+        }
+        .bottom-box:nth-child(3) {
+            background-color: #2ECC40;
+        }
+        .bottom-box:nth-child(4) {
+            background-color: #FF851B;
+        }
+        .bottom-box:active {
+            transform: scale(0.9);
+            box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.8); /* 15px */
+        }
+        .bottom-box.disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        @keyframes reveal {
+            0% { transform: rotate(0deg); opacity: 0; }
+            100% { transform: rotate(360deg); opacity: 1; }
+        }
+        .reveal-number {
+            animation: reveal 2s ease-in-out;
+        }
+        .bars {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 1.25rem; /* 20px */
+        }
+        .bar {
+            height: 0.625rem; /* 10px */
+            border-radius: 0.3125rem; /* 5px */
+            transition: width 0.5s ease-in-out;
+        }
+        .bar:nth-child(1) {
+            background-color: #FF4136;
+        }
+        .bar:nth-child(2) {
+            background-color: #2ECC40;
+        }
+        .bar:nth-child(3) {
+            background-color: #0074D9;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2rem;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 0.625rem; /* 10px */
+            text-align: center;
+        }
+        .modal-content h2,
+        .modal-content p,
+        .modal-content input,
+        .modal-content button {
+            color: black;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .bet-button {
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            border: none;
+            border-radius: 0.3125rem; /* 5px */
+            cursor: pointer;
+            background-color: #2ECC40;
+            color: white;
+            font-size: 1rem;
+        }
+        .tutorial-slide {
+            display: none;
+        }
+        .tutorial-slide.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="timer">
+            타이머: <span>00:00</span>
+        </div>
+        <div class="main-content">
+            <div class="gambling-area"></div>
+            <div class="gambling-list">
+                <div class="circle" id="target">0</div>
+                <div class="circle" id="value1">1</div>
+                <div class="circle" id="value2">2</div>
+                <div class="circle" id="value3">3</div>
+            </div>
+        </div>
+        <div class="bars">
+            <div class="bar" id="bar1"></div>
+            <div class="bar" id="bar2"></div>
+            <div class="bar" id="bar3"></div>
+        </div>
+        <div class="betting-area">
+            <div class="bottom-box" style="background-color: #FF4136;" id="betPlus" onclick="openBetModal('+')">+</div>
+            <div class="bottom-box" style="background-color: #0074D9;" id="betMinus" onclick="openBetModal('-')">-</div>
+            <div class="bottom-box" style="background-color: #2ECC40;" id="betEqual" onclick="openBetModal('=')">=</div>
+            <div class="bottom-box" style="background-color: #FF851B;" id="res">res</div>
+        </div>
+    </div>
+    <div id="betModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBetModal()">&times;</span>
+            <h2>배팅하기</h2>
+            <p>사용자: <span id="userName">user</span></p>
+            <p>자산: $<span id="userAssets">1000000</span></p>
+            <p id="betExplanation"></p>
+            <input type="number" id="betAmount" placeholder="배팅 금액 입력" />
+            <button class="bet-button" onclick="placeBet()">배팅</button>
+        </div>
+    </div>
+    <div id="tutorialModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTutorialModal()">&times;</span>
+            <div class="tutorial-slide active">
+                <h2>게임에 오신 것을 환영합니다</h2>
+                <p>이 게임은 간단한 배팅 게임입니다. 5분 동안 배팅을 할 수 있습니다.</p>
+                <button class="bet-button" onclick="nextSlide()">다음</button>
+            </div>
+            <div class="tutorial-slide">
+                <h2>게임 방법</h2>
+                <p>1부터 30까지의 랜덤 값(target)과 1부터 9까지의 세 개의 랜덤 값(value1, value2, value3)을 더한 값을 예측합니다.</p>
+                <button class="bet-button" onclick="nextSlide()">다음</button>
+            </div>
+            <div class="tutorial-slide">
+                <h2>배팅하기</h2>
+                <p>+, -, = 버튼을 사용하여 target 값과 value1, value2, value3의 합(res)의 관계를 예측하고 배팅합니다.</p>
+                <button class="bet-button" onclick="closeTutorialModal()">완료</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        class User {
+            constructor(name = "user", assets = 1000000) {
+                this.name = name;
+                this.assets = assets;
+                this.loadFromLocalStorage();
+            }
+
+            loadFromLocalStorage() {
+                const savedName = localStorage.getItem('userName');
+                const savedAssets = localStorage.getItem('userAssets');
+                if (savedName) this.name = savedName;
+                if (savedAssets) this.assets = parseInt(savedAssets);
+            }
+
+            saveToLocalStorage() {
+                localStorage.setItem('userName', this.name);
+                localStorage.setItem('userAssets', this.assets);
+            }
+
+            updateAssets(amount) {
+                this.assets += amount;
+                this.saveToLocalStorage();
+                document.getElementById('userAssets').innerText = this.assets;
+            }
+        }
+
+        const user = new User();
+        document.getElementById('userName').innerText = user.name;
+        document.getElementById('userAssets').innerText = user.assets;
+
+        let currentBet = null;
+        let betAmount = 0;
+        let hasBet = false;
+        let gameTimer = 300; // 5 minutes in seconds
+        let resultTimer = 120; // 2 minutes in seconds
+        let interval;
+        let currentSlide = 0;
+
+        function startGame() {
+            gameTimer = 300;
+            hasBet = false;
+            enableBetButtons();
+            interval = setInterval(updateTimer, 1000);
+            updateBars();
+            setInterval(updateBars, 1000); // Update bars every second
+            document.getElementById('target').innerText = Math.floor(Math.random() * 30) + 1;
+        }
+
+        function updateTimer() {
+            if (gameTimer > 0) {
+                gameTimer--;
+                const minutes = Math.floor(gameTimer / 60).toString().padStart(2, '0');
+                const seconds = (gameTimer % 60).toString().padStart(2, '0');
+                document.querySelector('.timer span').innerText = `${minutes}:${seconds}`;
+
+                if (gameTimer <= 60) {
+                    document.querySelector('.timer span').style.color = '#FF4136';
+                    document.querySelector('.timer span').style.animation = 'blink 1s step-start infinite';
+                } else {
+                    document.querySelector('.timer span').style.color = 'white';
+                    document.querySelector('.timer span').style.animation = 'none';
+                }
+            } else {
+                clearInterval(interval);
+                endGame();
+            }
+        }
+
+        function updateBars() {
+            let value1 = Math.random() * 50;
+            let value2 = Math.random() * (50 - value1);
+            let value3 = 100 - value1 - value2;
+
+            document.getElementById('bar1').style.width = value1 + '%';
+            document.getElementById('bar2').style.width = value2 + '%';
+            document.getElementById('bar3').style.width = value3 + '%';
+        }
+
+        function endGame() {
+            // Set the random values to the circles
+            const targetValue = parseInt(document.getElementById('target').innerText);
+            const value1 = Math.floor(Math.random() * 9) + 1;
+            const value2 = Math.floor(Math.random() * 9) + 1;
+            const value3 = Math.floor(Math.random() * 9) + 1;
+            const result = value1 + value2 + value3;
+
+            document.getElementById('value1').innerText = value1;
+            document.getElementById('value2').innerText = value2;
+            document.getElementById('value3').innerText = value3;
+            document.getElementById('res').innerText = result;
+
+            // Evaluate the bet
+            if (currentBet) {
+                let winAmount = 0;
+                if (currentBet === '+') {
+                    if (result > targetValue) {
+                        winAmount = getRandomMultiplier() * betAmount;
+                    }
+                } else if (currentBet === '-') {
+                    if (result < targetValue) {
+                        winAmount = getRandomMultiplier() * betAmount;
+                    }
+                } else if (currentBet === '=') {
+                    if (result === targetValue) {
+                        winAmount = betAmount * 3;
+                    }
+                }
+
+                if (winAmount > 0) {
+                    user.updateAssets(winAmount);
+                } else {
+                    user.updateAssets(-betAmount);
+                }
+            }
+
+            setTimeout(() => {
+                startResultTimer();
+            }, 1000);
+        }
+
+        function startResultTimer() {
+            resultTimer = 120;
+            interval = setInterval(updateResultTimer, 1000);
+        }
+
+        function updateResultTimer() {
+            if (resultTimer > 0) {
+                resultTimer--;
+                const minutes = Math.floor(resultTimer / 60).toString().padStart(2, '0');
+                const seconds = (resultTimer % 60).toString().padStart(2, '0');
+                document.querySelector('.timer span').innerText = `${minutes}:${seconds}`;
+
+                if (resultTimer <= 60) {
+                    document.querySelector('.timer span').style.color = '#FF4136';
+                    document.querySelector('.timer span').style.animation = 'blink 1s step-start infinite';
+                } else {
+                    document.querySelector('.timer span').style.color = 'white';
+                    document.querySelector('.timer span').style.animation = 'none';
+                }
+            } else {
+                clearInterval(interval);
+                startGame();
+            }
+        }
+
+        function getRandomMultiplier() {
+            return Math.random() * (2 - 1) + 1;
+        }
+
+        function openBetModal(betType) {
+            if (hasBet) {
+                alert("이번 라운드에 이미 배팅하셨습니다.");
+                return;
+            }
+            currentBet = betType;
+            let explanation = "";
+            if (betType === "+") {
+                explanation = "target 값보다 합계(res)가 더 크다고 예측합니다.";
+            } else if (betType === "-") {
+                explanation = "target 값보다 합계(res)가 더 작다고 예측합니다.";
+            } else if (betType === "=") {
+                explanation = "target 값과 합계(res)가 같다고 예측합니다.";
+            }
+            document.getElementById('betExplanation').innerText = explanation;
+            document.getElementById('betModal').style.display = 'flex';
+        }
+
+        function closeBetModal() {
+            currentBet = null;
+            document.getElementById('betModal').style.display = 'none';
+        }
+
+        function placeBet() {
+            betAmount = parseInt(document.getElementById('betAmount').value);
+            if (betAmount && betAmount <= user.assets) {
+                hasBet = true;
+                disableBetButtons();
+                closeBetModal();
+                console.log(`배팅 완료: ${currentBet} 금액: ${betAmount}`);
+            } else {
+                alert('유효한 배팅 금액을 입력해주세요.');
+            }
+        }
+
+        function enableBetButtons() {
+            document.getElementById('betPlus').classList.remove('disabled');
+            document.getElementById('betMinus').classList.remove('disabled');
+            document.getElementById('betEqual').classList.remove('disabled');
+        }
+
+        function disableBetButtons() {
+            document.getElementById('betPlus').classList.add('disabled');
+            document.getElementById('betMinus').classList.add('disabled');
+            document.getElementById('betEqual').classList.add('disabled');
+        }
+
+        function showTutorial() {
+            document.getElementById('tutorialModal').style.display = 'flex';
+        }
+
+        function closeTutorialModal() {
+            document.getElementById('tutorialModal').style.display = 'none';
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.tutorial-slide');
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            showTutorial();
+            startGame();
+        });
+    </script>
+</body>
+</html>
