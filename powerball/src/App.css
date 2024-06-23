@@ -1,42 +1,202 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+:root {
+  font-size: 16px; /* 1rem = 16px */
+}
+body {
+  background-color: #161921;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.25rem; /* 20px */
+  border: 0.125rem solid #444; /* 2px */
+  border-radius: 0.625rem; /* 10px */
+  box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.5); /* 15px */
+  background-color: #161921;
+}
+.timer {
+  font-size: 1.5rem; /* 24px */
+  margin-bottom: 1.25rem; /* 20px */
+}
+.timer span {
+  color: #FF4136;
+}
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.25rem; /* 20px */
+}
+.gambling-area {
+  width: 18.75rem; /* 300px */
+  height: 18.75rem; /* 300px */
+  background-color: #ffffff;
+  border: 0.125rem solid #444; /* 2px */
+  border-radius: 0.625rem; /* 10px */
+  margin-right: 1.25rem; /* 20px */
+  position: relative;
+}
+.gambling-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.circle {
+  width: 3.75rem; /* 60px */
+  height: 3.75rem; /* 60px */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem; /* 24px */
+  color: white;
+  font-weight: bold;
+  margin: 0.625rem 0; /* 10px */
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5); /* 10px */
+}
+.circle:nth-child(1) {
+  background-color: #2ECC40;
+}
+.circle:nth-child(2) {
+  background-color: #FF4136;
+}
+.circle:nth-child(3) {
+  background-color: #0074D9;
+}
+.circle:nth-child(4) {
+  background-color: #B10DC9;
+}
+.betting-area {
+  display: flex;
+  justify-content: center;
+  gap: 0.625rem; /* 10px */
+}
+.bottom-box {
+  width: 5rem; /* 80px */
+  height: 5rem; /* 80px */
+  border-radius: 0.625rem; /* 10px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem; /* 24px */
+  color: white;
+  font-weight: bold;
+  background-color: #161921;
+  border: 0.125rem solid #444; /* 2px */
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5); /* 10px */
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  user-select: none;
+}
+.bottom-box:nth-child(1) {
+  background-color: #FF4136;
+}
+.bottom-box:nth-child(2) {
+  background-color: #0074D9;
+}
+.bottom-box:nth-child(3) {
+  background-color: #2ECC40;
+}
+.bottom-box:nth-child(4) {
+  background-color: #FF851B;
+}
+.bottom-box:active {
+  transform: scale(0.9);
+  box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.8); /* 15px */
+}
+.bottom-box.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+@keyframes reveal {
+  0% { transform: rotate(0deg); opacity: 0; }
+  100% { transform: rotate(360deg); opacity: 1; }
+}
+.reveal-number {
+  animation: reveal 2s ease-in-out;
+}
+.bars {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1.25rem; /* 20px */
+}
+.bar {
+  height: 0.625rem; /* 10px */
+  border-radius: 0.3125rem; /* 5px */
+  transition: width 0.5s ease-in-out;
+}
+.bar:nth-child(1) {
+  background-color: #FF4136;
+}
+.bar:nth-child(2) {
+  background-color: #2ECC40;
+}
+.bar:nth-child(3) {
+  background-color: #0074D9;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
   padding: 2rem;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 0.625rem; /* 10px */
   text-align: center;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.modal-content h2,
+.modal-content p,
+.modal-content input,
+.modal-content button {
+  color: black;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bet-button {
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 0.3125rem; /* 5px */
+  cursor: pointer;
+  background-color: #2ECC40;
+  color: white;
+  font-size: 1rem;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.tutorial-slide {
+  display: none;
 }
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.tutorial-slide.active {
+  display: block;
 }
