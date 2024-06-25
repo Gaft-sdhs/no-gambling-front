@@ -1,10 +1,11 @@
 import "./css/headerItem.css";
+import { Link } from "react-router-dom";
 const HeaderItem = ({ name, link }) => {
   return (
     <div className="headerItem">
-      <a href={link}>{name}</a>
+      <Link to={link}>{name}</Link>
       <span className="underBar"></span>
-    </div> 
+    </div>
   );
 };
 export default HeaderItem;

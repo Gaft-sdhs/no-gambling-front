@@ -1,5 +1,10 @@
 .ranking {
   width: 27rem;
   height: 30rem;
-  background-color: aquamarine;
+  background-color: none;
+
+  border: 0.4rem solid white;
+
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
 }

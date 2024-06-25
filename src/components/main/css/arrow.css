@@ -17,8 +17,11 @@ cursor: pointer;
   height: 0.5rem;
   background-color: white;
   border-radius: 15px;
+  transition: 0.6s;
 }
-
+.arrow:hover > span {
+  background-color: #CBD3FF;
+}
 .arrow > .top {
   top: 0;
   left: 0;

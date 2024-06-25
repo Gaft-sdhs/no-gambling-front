@@ -3,7 +3,7 @@ import Index from "./pages/Index";
 import Snail from "./pages/Snail";
 import Store from "./pages/Store";
 import Ladder from "./pages/Ladder";
-import Script from "./Script";
+import PowerBall from "./pages/PowerBall";
 import { Route,Routes } from "react-router-dom";
 
 import "./css/App.css";
@@ -11,14 +11,14 @@ import "./css/App.css";
 function App() {
   return (
     <>
-      <Header />
+      <Header/>
       <Routes>
         <Route path="/" element={<Index />}/>
         <Route path="/snail" element={<Snail />}/>
         <Route path="/Ladder" element={<Ladder />}/>
+        <Route path="/Powerball" element={<PowerBall />}/>
         <Route path="/Store" element={<Store />}/>
       </Routes>
-      <Script />
     </>
   );
 }
