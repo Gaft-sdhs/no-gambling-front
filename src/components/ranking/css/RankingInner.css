@@ -1,0 +1,12 @@
+.rankingHeaderItem {
+    color: white;
+    font-weight: bolder;
+
+    transition: all 0.5s;
+    padding: 0.4rem 1rem;
+
+    font-size: 1.5rem;
+    border: 0.4rem solid white;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
