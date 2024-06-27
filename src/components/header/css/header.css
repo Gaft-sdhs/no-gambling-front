@@ -7,7 +7,7 @@
   flex-direction: row;
 
   justify-content: space-between;
-  padding: 0 15rem;
+  padding: 0 15vw;
 
   animation: onLanding 1.5s;
 }

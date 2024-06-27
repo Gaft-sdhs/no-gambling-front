@@ -1,7 +1,9 @@
-import "./css/RankingInner.css";
+import "./css/rankingInner.css";
 
 const RankingLeaderBoard = () => {
-  return <div className="ranking-ledaerBoard"></div>;
+  return <div className="ranking-ledaerBoard">
+    
+  </div>;
 };
 
 export default RankingLeaderBoard;
