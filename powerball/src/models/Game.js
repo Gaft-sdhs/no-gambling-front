@@ -11,19 +11,29 @@ class Game {
     this.currentBet = null;
     this.betAmount = 0;
     this.hasBet = false;
-    this.gameTimer = 300;
-    this.resultTimer = 120;
+    this.gameTimer = 300; // 5 minutes
+    this.resultTimer = 180; // 3 minutes
     this.targetValue = Math.floor(Math.random() * 30) + 1;
-    this.values = [0, 1, 2, 3];
+    this.values = this.generateRandomValues();
     this.bars = [33, 33, 34];
     this.showBetModal = false;
     this.showTutorialModal = !this.user.tutorialCompleted;
+  }
+
+  generateRandomValues() {
+    return [
+      this.targetValue,
+      Math.floor(Math.random() * 9) + 1,
+      Math.floor(Math.random() * 9) + 1,
+      Math.floor(Math.random() * 9) + 1,
+    ];
   }
 
   startGame() {
     this.gameTimer = 300;
     this.hasBet = false;
     this.targetValue = Math.floor(Math.random() * 30) + 1;
+    this.values = this.generateRandomValues();
     this.setBars();
   }
 
@@ -60,7 +70,7 @@ class Game {
   }
 
   startResultTimer() {
-    this.resultTimer = 120;
+    this.resultTimer = 180;
   }
 
   placeBet(amount) {

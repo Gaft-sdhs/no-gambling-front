@@ -15,8 +15,7 @@ function App() {
     setCurrentBet,
     betAmount,
     hasBet,
-    gameTimer,
-    resultTimer,
+    time,
     targetValue,
     values,
     bars,
@@ -27,19 +26,25 @@ function App() {
     startGame,
     placeBet,
     completeTutorial,
+    showResults,
+    isGameRunning,
   } = useGameState();
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const res = values.slice(1).reduce((acc, val) => acc + val, 0);
+
   return (
     <div className="container">
-      <Timer time={gameTimer} />
-      <GamblingArea target={targetValue} values={values.slice(1)} />
+      <Timer time={time} />
+      <GamblingArea target={targetValue} values={values} showResults={showResults} />
       <Bars bars={bars} />
       <BettingArea 
         hasBet={hasBet}
         setCurrentBet={setCurrentBet}
         setShowBetModal={setShowBetModal}
+        showResults={showResults}
+        res={res}
       />
       {showBetModal && (
         <BetModal 

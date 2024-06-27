@@ -1,4 +1,10 @@
-import { formatTime } from '../utils';
+import React from 'react';
+
+const formatTime = (time) => {
+  const minutes = String(Math.floor(time / 60)).padStart(2, '0');
+  const seconds = String(time % 60).padStart(2, '0');
+  return `${minutes}:${seconds}`;
+};
 
 const Timer = ({ time }) => {
   return (
