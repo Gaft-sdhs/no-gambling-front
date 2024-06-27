@@ -1,7 +1,14 @@
-const GamblingArea = ({ target, values, showResults }) => {
+import React from 'react';
+import './GamblingArea.css'; // CSS 파일 추가
+
+const GamblingArea = ({ target, values, showResults, imageSrc }) => {
   return (
     <div className="main-content">
-      <div className="gambling-area"></div>
+      <div className="gambling-area">
+        <div className="image-container">
+          <img src={imageSrc} alt="Gambling" className="centered-image" />
+        </div>
+      </div>
       <div className="gambling-list">
         <div className="circle" id="target">{target}</div>
         {values.slice(1).map((value, index) => (

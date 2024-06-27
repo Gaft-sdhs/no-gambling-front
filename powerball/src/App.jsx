@@ -7,6 +7,7 @@ import Timer from './components/Timer';
 import BettingArea from './components/BettingArea';
 import Bars from './components/Bars';
 import './App.css';
+import imageSrc from './img/뽑기.png'; // 이미지 파일 경로
 
 function App() {
   const {
@@ -37,7 +38,7 @@ function App() {
   return (
     <div className="container">
       <Timer time={time} />
-      <GamblingArea target={targetValue} values={values} showResults={showResults} />
+      <GamblingArea target={targetValue} values={values} showResults={showResults} imageSrc={imageSrc} />
       <Bars bars={bars} />
       <BettingArea 
         hasBet={hasBet}
