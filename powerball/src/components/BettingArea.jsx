@@ -1,4 +1,4 @@
-const BettingArea = ({ hasBet, setCurrentBet, setShowBetModal, showResults, res }) => {
+const BettingArea = ({ hasBet, setCurrentBet, setShowBetModal, showResults, res, placeBet }) => {
   const openBetModal = (betType) => {
     if (hasBet) {
       alert("이번 라운드에 이미 배팅하셨습니다.");

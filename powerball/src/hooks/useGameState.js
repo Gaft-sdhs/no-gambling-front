@@ -25,6 +25,7 @@ const useGameState = () => {
     game.startGame();
     setTime(game.gameTimer);
     setHasBet(game.hasBet);
+    setCurrentBet(game.currentBet);
     setTargetValue(game.targetValue);
     setValues([...game.values]);
     setIsGameRunning(true);
@@ -36,9 +37,10 @@ const useGameState = () => {
     setShowResults(true);
   };
 
-  const placeBet = (amount) => {
-    game.placeBet(amount);
+  const placeBet = (amount, betType) => {
+    game.placeBet(amount, betType);
     setHasBet(game.hasBet);
+    setCurrentBet(game.currentBet);
     setBetAmount(game.betAmount);
     setShowBetModal(game.showBetModal);
   };
@@ -50,8 +52,9 @@ const useGameState = () => {
 
   const handleTimeEnd = useCallback(() => {
     if (isGameRunning) {
-      game.endGame();
+      const message = game.endGame();
       setValues([...game.values]);
+      alert(message); // 결과 메시지를 경고창으로 표시
       startResultTimer();
     } else {
       setShowResults(false);

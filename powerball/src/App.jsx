@@ -7,7 +7,7 @@ import Timer from './components/Timer';
 import BettingArea from './components/BettingArea';
 import Bars from './components/Bars';
 import './App.css';
-import imageSrc from './img/뽑기.png'; // 이미지 파일 경로
+import imageSrc from './img/뽑기.png';
 
 function App() {
   const {
@@ -29,6 +29,7 @@ function App() {
     completeTutorial,
     showResults,
     isGameRunning,
+    getBetExplanation,
   } = useGameState();
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -46,6 +47,10 @@ function App() {
         setShowBetModal={setShowBetModal}
         showResults={showResults}
         res={res}
+        placeBet={placeBet}
+        currentBet={currentBet}
+        targetValue={targetValue}
+        getBetExplanation={getBetExplanation}
       />
       {showBetModal && (
         <BetModal 

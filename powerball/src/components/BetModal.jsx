@@ -8,9 +8,9 @@ const BetModal = ({ user, currentBet, placeBet, setCurrentBet, setShowBetModal }
   };
 
   const explanation = {
-    '+': 'target 값보다 합계(res)가 더 크다고 예측합니다.',
-    '-': 'target 값보다 합계(res)가 더 작다고 예측합니다.',
-    '=': 'target 값과 합계(res)가 같다고 예측합니다.',
+    '+': '합계 값보다 더 크다고 예측합니다.',
+    '-': '합계 값보다 더 작다고 예측합니다.',
+    '=': '합계 값과 같다고 예측합니다.',
   }[currentBet];
 
   return (
