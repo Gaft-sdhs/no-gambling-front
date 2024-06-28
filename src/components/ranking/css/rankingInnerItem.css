@@ -1,7 +1,35 @@
-.rankingInnerItem-MY {
+.rankingInnerItem {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    display: flex;
+    gap: 1rem;
     
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 0.5rem;
+
+    border-radius: 15px;
+    align-items: center;
 }
 
-.rankingInnerItem-ALL {
+.rankingInnerItem > .rank {
+    width: 4.5rem;
+    height: 4.5rem;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+
+    background-color: #FFFFFF20;
+}
+
+.rankingInnerItem.MY {
+    background-color: #8DACFF20;
+} 
+
+.rankingInnerItem.MY > .rank {
+    background-color: #8dabff20;
 }

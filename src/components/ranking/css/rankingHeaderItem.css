@@ -11,12 +11,14 @@
     border: 0.4rem solid white;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-
 }
 
 .rankingHeaderItem:hover {
     color: #CBD3FF;
-    /* border: 0.4rem solid #CBD3FF; */
 
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.rankingHeaderItem.on {
+    color: #CBD3FF;
     background-color: rgba(255, 255, 255, 0.2);
 }
