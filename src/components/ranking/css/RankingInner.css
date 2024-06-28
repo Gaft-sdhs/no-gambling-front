@@ -1,22 +1,19 @@
-.rankingHeaderItem {
-    cursor: pointer;
+.ranking-leaderBoard{
+    width: 100%;
+}
 
+.ranking-leaderBoard div {
     color: white;
-    font-weight: bolder;
-
-    transition: all 0.5s;
-    padding: 0.6rem 1.9rem;
-
     font-size: 1.5rem;
-    border: 0.4rem solid white;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-
+    font-weight: bold;
 }
 
-.rankingHeaderItem:hover {
-    color: #CBD3FF;
-    /* border: 0.4rem solid #CBD3FF; */
-
-    background-color: rgba(255, 255, 255, 0.2);
+.leaderBoard-my {
+    width: 100%;
 }
+
+.leaderBoard-all {
+    width: 100%;
+    padding: 0.6rem;
+}
+
