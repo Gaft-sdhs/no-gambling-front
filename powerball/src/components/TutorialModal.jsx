@@ -6,11 +6,11 @@ const TutorialModal = ({ currentSlide, setCurrentSlide, setShowTutorialModal, co
     },
     {
       title: '게임 방법',
-      content: '1부터 30까지의 랜덤 값(target)과 1부터 9까지의 세 개의 랜덤 값(value1, value2, value3)을 더한 값을 예측합니다.',
+      content: '1부터 30까지의 랜덤 값(target)과 1부터 9까지의 세 개의 랜덤 값(1, 2, 3)을 더한 값을 예측합니다.',
     },
     {
       title: '배팅하기',
-      content: '+, -, = 버튼을 사용하여 target 값과 value1, value2, value3의 합(res)의 관계를 예측하고 배팅합니다.',
+      content: '+, -, = 버튼을 사용하여 target 값과 1, 2, 3 합(res)의 관계를 예측하고 배팅합니다.',
     }
   ];
 

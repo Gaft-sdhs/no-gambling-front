@@ -1,5 +1,5 @@
 import React from 'react';
-import './GamblingArea.css'; // CSS 파일 추가
+import './GamblingArea.css'; 
 
 const GamblingArea = ({ target, values, showResults, imageSrc }) => {
   return (

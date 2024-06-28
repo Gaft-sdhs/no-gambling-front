@@ -16,15 +16,15 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 1.25rem; /* 20px */
-  border: 0.125rem solid #444; /* 2px */
-  border-radius: 0.625rem; /* 10px */
-  box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.5); /* 15px */
+  padding: 1.25rem; 
+  border: 0.125rem solid #444; 
+  border-radius: 0.625rem; 
+  box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.5); 
   background-color: #161921;
 }
 .timer {
-  font-size: 1.5rem; /* 24px */
-  margin-bottom: 1.25rem; /* 20px */
+  font-size: 1.5rem; 
+  margin-bottom: 1.25rem; 
 }
 .timer span {
   color: #FF4136;
@@ -33,15 +33,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.25rem; /* 20px */
+  margin-bottom: 1.25rem; 
 }
 .gambling-area {
-  width: 18.75rem; /* 300px */
-  height: 18.75rem; /* 300px */
+  width: 18.75rem; 
+  height: 18.75rem; 
   background-color: #ffffff;
-  border: 0.125rem solid #444; /* 2px */
-  border-radius: 0.625rem; /* 10px */
-  margin-right: 1.25rem; /* 20px */
+  border: 0.125rem solid #444; 
+  border-radius: 0.625rem; 
+  margin-right: 1.25rem; 
   position: relative;
 }
 .gambling-list {
@@ -50,17 +50,17 @@ body {
   justify-content: space-around;
 }
 .circle {
-  width: 3.75rem; /* 60px */
-  height: 3.75rem; /* 60px */
+  width: 3.75rem; 
+  height: 3.75rem; 
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem; /* 24px */
+  font-size: 1.5rem;
   color: white;
   font-weight: bold;
-  margin: 0.625rem 0; /* 10px */
-  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5); /* 10px */
+  margin: 0.625rem 0; 
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5); 
 }
 .circle:nth-child(1) {
   background-color: #2ECC40;
@@ -77,21 +77,21 @@ body {
 .betting-area {
   display: flex;
   justify-content: center;
-  gap: 0.625rem; /* 10px */
+  gap: 0.625rem; 
 }
 .bottom-box {
-  width: 5rem; /* 80px */
-  height: 5rem; /* 80px */
-  border-radius: 0.625rem; /* 10px */
+  width: 5rem; 
+  height: 5rem;
+  border-radius: 0.625rem; 
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5rem; /* 24px */
+  font-size: 1.5rem; 
   color: white;
   font-weight: bold;
   background-color: #161921;
-  border: 0.125rem solid #444; /* 2px */
-  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5); /* 10px */
+  border: 0.125rem solid #444; 
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.5); 
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
   user-select: none;
@@ -110,7 +110,7 @@ body {
 }
 .bottom-box:active {
   transform: scale(0.9);
-  box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.8); /* 15px */
+  box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.8); 
 }
 .bottom-box.disabled {
   cursor: not-allowed;
@@ -127,11 +127,11 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 1.25rem; /* 20px */
+  margin-bottom: 1.25rem; 
 }
 .bar {
-  height: 0.625rem; /* 10px */
-  border-radius: 0.3125rem; /* 5px */
+  height: 0.625rem; 
+  border-radius: 0.3125rem;
   transition: width 0.5s ease-in-out;
 }
 .bar:nth-child(1) {
@@ -163,7 +163,7 @@ body {
   border: 1px solid #888;
   width: 80%;
   max-width: 300px;
-  border-radius: 0.625rem; /* 10px */
+  border-radius: 0.625rem; 
   text-align: center;
 }
 .modal-content h2,
@@ -188,7 +188,7 @@ body {
   padding: 0.5rem 1rem;
   margin-top: 1rem;
   border: none;
-  border-radius: 0.3125rem; /* 5px */
+  border-radius: 0.3125rem; 
   cursor: pointer;
   background-color: #2ECC40;
   color: white;
