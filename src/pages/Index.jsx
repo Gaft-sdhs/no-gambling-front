@@ -1,5 +1,5 @@
 import "./css/index.css"
-import Ranking from "../components/main/Ranking";
+import Ranking from "../components/ranking/Ranking";
 import Sliders from "../components/main/Sliders";
 
 

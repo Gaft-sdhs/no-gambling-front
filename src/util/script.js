@@ -1,12 +1,12 @@
 window.onload = function () {
   let currentIndex = 0;
   const sliderWrap = document.querySelector(".index .sliderWrap");
-  const slider = document.querySelectorAll(".index .slider");
+  // const slider = document.querySelectorAll(".index .slider");
 
   const arrow = document.querySelectorAll(".index .arrow");
   const dots = document.querySelectorAll(".index .dot");
 
-  console.log(dots);
+  // console.log(dots);
 
   const dotsReset = ()=>{
     for(let item of dots) {

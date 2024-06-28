@@ -1,0 +1,22 @@
+.rankingHeaderItem {
+    cursor: pointer;
+
+    color: white;
+    font-weight: bolder;
+
+    transition: all 0.5s;
+    padding: 0.6rem 1.9rem;
+
+    font-size: 1.5rem;
+    border: 0.4rem solid white;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+
+}
+
+.rankingHeaderItem:hover {
+    color: #CBD3FF;
+    /* border: 0.4rem solid #CBD3FF; */
+
+    background-color: rgba(255, 255, 255, 0.2);
+}
