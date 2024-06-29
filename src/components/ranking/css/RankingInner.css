@@ -4,11 +4,15 @@
 
 .leaderBoard-my {
     width: 100%;
+    border-bottom: 0.4rem solid white; 
+    border-radius: 15px;
 }
 
 .leaderBoard-all {
     width: 100%;
     height: 310px;
     overflow: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
 }
 

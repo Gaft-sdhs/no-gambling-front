@@ -1,8 +1,9 @@
 import "./css/rankingHeaderItem.css"
 
-const RankingHeaderItem = ({ name })=>{
+const RankingHeaderItem = ({ name, on, direction, onClick})=>{
+
     return (
-        <div className="rankingHeaderItem">{name}</div>
+        <div onClick={()=>{onClick(direction)}} className={"rankingHeaderItem " + (on ? "on" : "")}>{name}</div>
     )
 }
 

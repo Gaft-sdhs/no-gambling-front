@@ -4,10 +4,11 @@
     font-weight: bold;
 
     display: flex;
-    gap: 1rem;
+    justify-content: flex-start;
+    /* gap: 1rem; */
     
     background-color: rgba(255, 255, 255, 0.3);
-    margin: 0.5rem;
+    margin: 0.6rem 1rem;
 
     border-radius: 15px;
     align-items: center;
@@ -25,10 +26,17 @@
 
     background-color: #FFFFFF20;
 }
+.rankingInnerItem .name {
+    margin-left: 1rem;
+}
+.rankingInnerItem .money {
+    padding-right: 10px;
+    margin-left: auto;
+}
 
 .rankingInnerItem.MY {
     background-color: #8DACFF20;
-} 
+}
 
 .rankingInnerItem.MY > .rank {
     background-color: #8dabff20;
