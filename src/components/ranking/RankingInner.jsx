@@ -1,4 +1,4 @@
-import "./css/rankingInnerItem.css";
+import "./css/rankingInner.css";
 import RankingInnerItem from "./RankingInnerItem";
 import { LeaderBoardChange } from "./Ranking"
 import { useState, useContext } from "react";

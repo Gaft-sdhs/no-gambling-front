@@ -72,7 +72,7 @@ const Snail = () => {
             Start Race
           </button>
         </div>
-        <Ranking />
+        <Ranking/>
       </section>
     </main>
   );
