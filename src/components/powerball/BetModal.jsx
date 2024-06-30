@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const BetModal = ({ user, currentBet, placeBet, setCurrentBet, setShowBetModal }) => {
+const BetModal = ({ user, currentBet, placeBet, setShowBetModal }) => {
   const [betAmount, setBetAmount] = useState('');
 
   const handleBet = () => {

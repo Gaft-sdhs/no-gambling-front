@@ -1,11 +1,12 @@
-const BettingArea = ({ hasBet, setCurrentBet, setShowBetModal, showResults, res, placeBet }) => {
+const BettingArea = ({ hasBet, updateCurrentBet, setShowBetModal, showResults, res }) => {
   const openBetModal = (betType) => {
     if (hasBet) {
       alert("이번 라운드에 이미 배팅하셨습니다.");
       return;
     }
-    setCurrentBet(betType);
+    updateCurrentBet(betType); // updateCurrentBet 사용
     setShowBetModal(true);
+    console.log(`Bet type set to: ${betType}`); // 설정 확인
   };
 
   return (
@@ -21,4 +22,3 @@ const BettingArea = ({ hasBet, setCurrentBet, setShowBetModal, showResults, res,
 };
 
 export default BettingArea;
-  

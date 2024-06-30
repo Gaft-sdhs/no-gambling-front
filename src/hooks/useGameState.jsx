@@ -3,14 +3,11 @@ import User from '../models/User';
 import Game from '../models/Game';
 import useBars from './useBars';
 
-// useGameState 훅 정의
 const useGameState = () => {
-  // User 및 Game 인스턴스 생성 및 상태 설정
   const [user] = useState(new User());
   const [game] = useState(new Game(user));
 
-  // 게임 관련 상태 초기화
-  const [currentBet, setCurrentBet] = useState(game.currentBet);
+  const [currentBet, setCurrentBet] = useState(null);
   const [betAmount, setBetAmount] = useState(game.betAmount);
   const [hasBet, setHasBet] = useState(game.hasBet);
   const [targetValue, setTargetValue] = useState(game.targetValue);
@@ -22,10 +19,13 @@ const useGameState = () => {
   const [time, setTime] = useState(game.gameTimer);
   const [isGameRunning, setIsGameRunning] = useState(true);
 
-  // useBars 훅 사용
   useBars(setBars, game);
 
-  // 게임 시작 함수
+  const updateCurrentBet = (bet) => {
+    setCurrentBet(bet);
+    game.currentBet = bet; // Game 클래스 내 currentBet 설정
+  };
+
   const startGame = () => {
     game.startGame();
     setTime(game.gameTimer);
@@ -35,14 +35,12 @@ const useGameState = () => {
     setIsGameRunning(true);
   };
 
-  // 결과 타이머 시작 함수
   const startResultTimer = () => {
     setTime(game.resultTimer);
     setIsGameRunning(false);
     setShowResults(true);
   };
 
-  // 베팅 처리 함수
   const placeBet = (amount) => {
     game.placeBet(amount);
     setHasBet(game.hasBet);
@@ -50,13 +48,11 @@ const useGameState = () => {
     setShowBetModal(game.showBetModal);
   };
 
-  // 튜토리얼 완료 처리 함수
   const completeTutorial = () => {
     user.completeTutorial();
     setShowTutorialModal(false);
   };
 
-  // 타이머 종료 처리 함수
   const handleTimeEnd = useCallback(() => {
     if (isGameRunning) {
       game.endGame();
@@ -68,7 +64,6 @@ const useGameState = () => {
     }
   }, [isGameRunning, game]);
 
-  // 타이머 관리
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(prevTime => {
@@ -85,11 +80,10 @@ const useGameState = () => {
     return () => clearInterval(interval);
   }, [handleTimeEnd]);
 
-  // 상태 및 함수 반환
   return {
     user,
     currentBet,
-    setCurrentBet,
+    updateCurrentBet, // 수정된 함수 반환
     betAmount,
     hasBet,
     time,

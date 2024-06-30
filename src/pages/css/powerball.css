@@ -24,6 +24,7 @@
 .timer {
   font-size: 1.5rem; 
   margin-bottom: 1.25rem; 
+  color: white;
 }
 .timer span {
   color: #FF4136;
