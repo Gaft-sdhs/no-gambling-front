@@ -1,0 +1,135 @@
+.LadderGame {
+  text-align: center;
+  position: relative;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  float: left; /* 전체를 왼쪽으로 배치 */
+  margin-left: 20px;
+}
+
+.con {
+  display: flex;
+  justify-content: space-between;
+  width: 400px; /* Adjusted width to fit the circles */
+  margin: 20px 0;
+  position: relative; /* To position circles absolutely within this container */
+  padding-top: 80px; /* Added padding to avoid touching the top */
+}
+
+.lf, .rt {
+  margin-top: 80px;
+  width: 80px; /* Adjusted size */
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  z-index: 1; /* Bring the circles to the front */
+}
+
+.lf {
+  background-color: #5570D0;
+  color: white;
+  top: -40px; /* Adjusted to position above the ladder */
+  left: 0; /* Left align */
+}
+
+.rt {
+  background-color: #E24A4A;
+  color: white;
+  top: -40px; /* Adjusted to position above the ladder */
+  right: 0; /* Right align */
+}
+
+.choice-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  background-color: transparent;
+  border-radius: 30px;
+}
+
+.choice {
+  width: 80px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 30px;
+  margin: 0;
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.choice.selected:nth-child(1) {
+  background-color: #E24A4A;
+  border-color: #E24A4A;
+}
+
+.choice.selected:nth-child(2) {
+  background-color: #5570D0;
+  border-color: #5570D0;
+}
+
+.start-button {
+  margin: 20px;
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  
+  background-color: #2c2c2c;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.endpoints {
+  display: flex;
+  justify-content: space-between;
+  width: 400px; /* Adjusted width to fit the circles */
+  margin-top: 10px;
+  position: relative; /* To position circles absolutely within this container */
+}
+
+.endpoints div {
+  width: 80px; /* Adjusted size */
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  position: absolute;
+  bottom: -65px; /* Adjusted to position below the ladder */
+  z-index: 1; /* Bring the circles to the front */
+}
+
+.hol {
+  background-color: #E24A4A;
+  color: white;
+  left: 0; /* Left align */
+}
+
+.jjk {
+  background-color: #5570D0;
+  color: white;
+  right: 0; /* Right align */
+}

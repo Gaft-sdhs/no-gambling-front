@@ -1,0 +1,19 @@
+.ranking-leaderBoard{
+    width: 100%;
+}
+
+.ranking-leaderBoard div {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.leaderBoard-my {
+    width: 100%;
+}
+
+.leaderBoard-all {
+    width: 100%;
+    padding: 0.6rem;
+}
+

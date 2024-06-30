@@ -1,0 +1,15 @@
+.ranking {
+  width: 26rem;
+  height: 30rem;
+  background-color: none;
+
+  border: 0.4rem solid white;
+
+  border-top-left-radius: 1.8rem;
+  border-top-right-radius: 1.8rem;
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+}
