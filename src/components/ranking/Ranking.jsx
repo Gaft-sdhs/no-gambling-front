@@ -1,7 +1,9 @@
 import "./css/ranking.css";
 import RankingHeader from "./RankingHedaer";
 import RankingInner from "./RankingInner";
-import { useState } from "react";
+import { useState, createContext } from "react";
+
+export const LeaderBoardChange = createContext();
 
 const Ranking = () => {
   const [leaderboard, setLeaderBoard] = useState(true);
@@ -9,11 +11,22 @@ const Ranking = () => {
   // true => totalMoney
   // false => pureMoney
 
+  const changeEvent = (dicrection)=>{
+    if(dicrection === "left")
+      setLeaderBoard(true);
+    else
+      setLeaderBoard(false);
+  };
+
   return (
     <div className="ranking">
-      <RankingHeader />
-      {leaderboard ? <RankingInner /> : <RankingInner />}
+      <LeaderBoardChange.Provider value={{leaderboard, changeEvent}}>
+        <RankingHeader />
+        <RankingInner leaderboard={leaderboard}/>
+      </LeaderBoardChange.Provider>
     </div>
   );
+
 };
+
 export default Ranking;

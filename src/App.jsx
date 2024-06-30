@@ -6,7 +6,7 @@ import Ladder from "./pages/Ladder";
 import PowerBall from "./pages/PowerBall";
 import { Route, Routes, Navigate } from "react-router-dom";
 
-import "./css/App.css";
+import "./css/index.css";
 
 function App() {
   return (

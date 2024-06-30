@@ -1,9 +1,8 @@
-import "./css/index.css"
-import Ranking from "../components/ranking/Ranking";
+import "./css/index.css";
 import Sliders from "../components/main/Sliders";
+import Ranking from "../components/ranking/Ranking";
 
-
-const Index = ()=>{
+const Index = () => {
   return (
     <main className="index">
       <section className="container">
@@ -11,6 +10,6 @@ const Index = ()=>{
         <Ranking />
       </section>
     </main>
-  )
-}
+  );
+};
 export default Index;

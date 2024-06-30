@@ -1,15 +1,13 @@
 .ranking {
   width: 26rem;
-  height: 30rem;
+  height: 31rem;
   background-color: none;
 
-  border: 0.4rem solid white;
+  box-shadow: inset 0 -0.4rem 0 0 white, inset 0 0.4rem 0 0 white, inset -0.4rem 0 0 0 white, inset 0.4rem 0 0 0 white;
 
   border-top-left-radius: 1.8rem;
   border-top-right-radius: 1.8rem;
   display: flex;
 
   flex-direction: column;
-
-  overflow: hidden;
 }

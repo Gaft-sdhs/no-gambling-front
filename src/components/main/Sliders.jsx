@@ -1,38 +1,69 @@
-import "./css/slider.css";
-import Arrow from "./Arrow";
-import Dots from "./Dots";
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import slider01 from "../../assets/slider01.png";
 import slider02 from "../../assets/slider02.png";
 import slider03 from "../../assets/slider03.png";
-import pageLogo from "../../assets/pageLogo.png";
+import Arrow from "./Arrow";
+import "./css/slider.css";
 
-const Slider = () => {
+const CustomNextArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <Arrow
+      id="arrowRight"
+      styleValue={{
+        transform: "translate(0, -50%) rotate(180deg)",
+        right: "10px",
+      }}
+      onClick={onClick}
+    />
+  );
+};
+
+const CustomPrevArrow = (props) => {
+  const { onClick } = props;
+  return (
+    <Arrow
+      id="arrowLeft"
+      styleValue={{
+        transform: "translate(0, -50%) rotate(0deg)",
+        left: "10px",
+      }}
+      onClick={onClick}
+    />
+  );
+};
+
+const Sliders = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
+  };
+
   return (
     <div className="sliderContainer">
-      <div className="sliderWrap">
-        <div className="slider">
-          <img src={slider01} alt="#slider" />
+      <Slider {...settings}>
+        <div>
+          <img src={slider01} alt="slider 1" />
         </div>
-        <div className="slider">
-          <img src={slider02} alt="#slider" />
+        <div>
+          <img src={slider02} alt="slider 2" />
         </div>
-        <div className="slider">
-          <img src={slider03} alt="#slider" />
+        <div>
+          <img src={slider03} alt="slider 3" />
         </div>
-      </div>
-      <Arrow
-        id={"arrowLeft"}
-        styleValue={{ transform: "translate(0, -50%) rotate(0deg)", left: "0" }}
-      />
-      <Arrow
-        id={"arrowRight"}
-        styleValue={{
-          transform: "translate(-100%, -50%) rotate(180deg)",
-          left: "100%",
-        }}
-      />
-      <Dots />
+      </Slider>
     </div>
   );
 };
-export default Slider;
+
+export default Sliders;
