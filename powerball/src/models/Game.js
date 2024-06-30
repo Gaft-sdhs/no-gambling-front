@@ -1,25 +1,28 @@
 import { getRandomMultiplier } from '../utils';
 import { updateBars } from '../utils/bars';
 
+// Game 클래스 정의
 class Game {
   constructor(user) {
     this.user = user;
-    this.resetGame();
+    this.resetGame(); // 게임 초기화
   }
 
+  // 게임 초기화 메서드
   resetGame() {
     this.currentBet = null;
     this.betAmount = 0;
     this.hasBet = false;
-    this.gameTimer = 60;
-    this.resultTimer = 30;
-    this.targetValue = Math.floor(Math.random() * 30) + 1;
-    this.values = this.generateRandomValues();
-    this.bars = [33, 33, 34];
+    this.gameTimer = 60; // 게임 타이머 설정
+    this.resultTimer = 30; // 결과 타이머 설정
+    this.targetValue = Math.floor(Math.random() * 30) + 1; // 목표 값 설정
+    this.values = this.generateRandomValues(); // 랜덤 값 생성
+    this.bars = [33, 33, 34]; // 바 초기 설정
     this.showBetModal = false;
-    this.showTutorialModal = !this.user.tutorialCompleted;
+    this.showTutorialModal = !this.user.tutorialCompleted; // 튜토리얼 모달 표시 여부
   }
 
+  // 랜덤 값 생성 메서드
   generateRandomValues() {
     return [
       this.targetValue,
@@ -29,25 +32,29 @@ class Game {
     ];
   }
 
+  // 게임 시작 메서드
   startGame() {
     this.gameTimer = 60;
     this.hasBet = false;
     this.targetValue = Math.floor(Math.random() * 30) + 1;
     this.values = this.generateRandomValues();
-    this.setBars();
+    this.setBars(); // 바 업데이트
   }
 
+  // 바 업데이트 메서드
   setBars() {
     this.bars = updateBars();
   }
 
+  // 게임 종료 메서드
   endGame() {
     if (!this.hasBet) {
       alert('배팅을 하지 않았습니다.');
-      this.startResultTimer();
+      this.startResultTimer(); // 결과 타이머 시작
       return;
     }
 
+    // 결과 값 계산
     const value1 = Math.floor(Math.random() * 9) + 1;
     const value2 = Math.floor(Math.random() * 9) + 1;
     const value3 = Math.floor(Math.random() * 9) + 1;
@@ -58,7 +65,7 @@ class Game {
     let winAmount = 0;
     let message = '';
 
-    
+    // 베팅 결과 처리
     if (this.currentBet === '+' && result > this.targetValue) {
       winAmount = this.betAmount * 2;  
       message = `성공! $${winAmount}를 얻었습니다.`;
@@ -73,34 +80,40 @@ class Game {
       message = `실패! $${Math.abs(winAmount)}를 잃었습니다.`;
     }
 
+    // 자산 업데이트
     this.user.updateAssets(winAmount);
 
+    // 결과 메시지 표시
     setTimeout(() => {
       alert(message);
       this.startResultTimer();
     }, 1000);
   }
 
+  // 결과 타이머 시작 메서드
   startResultTimer() {
     this.resultTimer = 30;
   }
 
+  // 베팅 처리 메서드
   placeBet(amount) {
     if (amount && amount <= this.user.assets) {
       this.hasBet = true;
       this.betAmount = amount;
       this.showBetModal = false;
-      this.user.deductAssets(amount);
+      this.user.deductAssets(amount); // 자산 차감
       console.log(`Updated assets after bet: ${this.user.assets}`);
     } else {
       alert('유효한 배팅 금액을 입력해주세요.');
     }
   }
 
+  // 베팅 모달 표시 여부 토글
   toggleBetModal(show) {
     this.showBetModal = show;
   }
 
+  // 튜토리얼 모달 표시 여부 토글
   toggleTutorialModal(show) {
     this.showTutorialModal = show;
   }
