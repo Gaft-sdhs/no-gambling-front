@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import SnailRace from "../components/snail/SnailRace";
+import Ranking from "../components/ranking/Ranking";
+
 import snailImage1 from "../assets/1snail.png";
 import snailImage2 from "../assets/2snail.png";
 import snailImage3 from "../assets/3snail.png";
@@ -70,6 +72,7 @@ const Snail = () => {
             Start Race
           </button>
         </div>
+        <Ranking />
       </section>
     </main>
   );
