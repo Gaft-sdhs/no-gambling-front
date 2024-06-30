@@ -58,7 +58,6 @@ const mockData1 = [
     money: 9103270000,
   },
 ];
-
 const RankingLeaderBoard = () => {
   const [user, setUser] = useState({
     rank: 404,
@@ -69,15 +68,19 @@ const RankingLeaderBoard = () => {
   const [user1, setUser1] = useState({
     rank: 501,
     name: "나",
-    money: 0,
+    money: parseInt(localStorage.getItem("totalAssets")) || 0,
   });
 
   const { leaderboard } = useContext(LeaderBoardChange);
 
   useEffect(() => {
     const updateMoney = () => {
-      const updatedMoney = parseInt(localStorage.getItem("userAssets")) || user.money;
-      setUser((prevUser) => ({ ...prevUser, money: updatedMoney }));
+      const userAssets = parseInt(localStorage.getItem("userAssets")) || user.money;
+      const totalAssets = parseInt(localStorage.getItem("totalAssets")) || user1.money;
+      const netProfit = totalAssets - userAssets;
+      
+      setUser((prevUser) => ({ ...prevUser, money: userAssets }));
+      setUser1((prevUser1) => ({ ...prevUser1, money: netProfit }));
     };
 
     window.addEventListener("storage", updateMoney);
