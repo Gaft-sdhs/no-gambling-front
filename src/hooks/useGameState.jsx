@@ -23,7 +23,7 @@ const useGameState = () => {
 
   const updateCurrentBet = (bet) => {
     setCurrentBet(bet);
-    game.currentBet = bet; // Game 클래스 내 currentBet 설정
+    game.currentBet = bet; 
   };
 
   const startGame = () => {
