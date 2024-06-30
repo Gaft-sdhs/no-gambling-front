@@ -1,7 +1,7 @@
 import "./css/RankingInner.css";
 import RankingInnerItem from "./RankingInnerItem";
-import { LeaderBoardChange } from "./Ranking"
-import { useState, useContext } from "react";
+import { LeaderBoardChange } from "./Ranking";
+import { useState, useContext, useEffect } from "react";
 
 const mockData = [
   {
@@ -59,35 +59,43 @@ const mockData1 = [
   },
 ];
 
-let me = {
-  rank: 404,
-  name: "나",
-  money: 1000000,
-};
-
-let me1 = {
-  rank: 501,
-  name: "나",
-  money: 0,
-};
-
 const RankingLeaderBoard = () => {
-  const [user, setUser] = useState(me);
-  const [user1, setUser1] = useState(me1);
+  const [user, setUser] = useState({
+    rank: 404,
+    name: "나",
+    money: parseInt(localStorage.getItem("userAssets")) || 1000000,
+  });
 
-  const {leaderboard} = useContext(LeaderBoardChange);
+  const [user1, setUser1] = useState({
+    rank: 501,
+    name: "나",
+    money: 0,
+  });
 
-  console.log(leaderboard);
+  const { leaderboard } = useContext(LeaderBoardChange);
+
+  useEffect(() => {
+    const updateMoney = () => {
+      const updatedMoney = parseInt(localStorage.getItem("userAssets")) || user.money;
+      setUser((prevUser) => ({ ...prevUser, money: updatedMoney }));
+    };
+
+    window.addEventListener("storage", updateMoney);
+
+    return () => {
+      window.removeEventListener("storage", updateMoney);
+    };
+  }, []);
 
   return (
     <div className="ranking-leaderBoard">
       <div className="leaderBoard-my">
-        <RankingInnerItem type={"MY"} {...(leaderboard?user:user1)} />
+        <RankingInnerItem type={"MY"} {...(leaderboard ? user : user1)} />
       </div>
       <div className="leaderBoard-all">
-        {(leaderboard?mockData:mockData1).map((item) => {
-          return <RankingInnerItem key={item.rank} type={"ALL"} {...item} />;
-        })}
+        {(leaderboard ? mockData : mockData1).map((item) => (
+          <RankingInnerItem key={item.rank} type={"ALL"} {...item} />
+        ))}
       </div>
     </div>
   );

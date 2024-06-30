@@ -21,3 +21,4 @@ const BettingArea = ({ hasBet, setCurrentBet, setShowBetModal, showResults, res,
 };
 
 export default BettingArea;
+  
