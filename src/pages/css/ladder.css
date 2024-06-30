@@ -1,0 +1,17 @@
+.ladder {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.ladder > .container {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  gap: 6rem;
+
+  flex-wrap: wrap;
+  justify-content: center;
+}
