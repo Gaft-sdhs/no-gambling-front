@@ -5,6 +5,7 @@ import { useContext } from "react";
 
 const RankingHeader = () => {
   const {leaderboard, changeEvent} = useContext(LeaderBoardChange);
+  
   return (
     <div className="ranking-header">
       <RankingHeaderItem name={"총 재산 순위"} on={leaderboard} direction={"left"} onClick={changeEvent}/>
