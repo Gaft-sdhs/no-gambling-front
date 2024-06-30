@@ -1,0 +1,45 @@
+.ladder-container {
+  position: relative;
+  width: 360px; /* Adjusted width to fit the circles */
+  height: 300px; /* Adjusted height to balance the layout */
+  padding-bottom: 30px;
+}
+
+.line {
+  position: absolute;
+  background-color: #ffffff;
+  z-index: 0; /* Ensure the lines are behind the circles */
+}
+
+.vertical {
+  width: 40px;
+  height: 100%;
+}
+
+.horizontal {
+  height: 40px;
+  width: calc(100% - 40px); /* Adjusted to fit between vertical lines */
+  left: 20px; /* Start from left to fit between vertical lines */
+}
+
+.player {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  transition: top 0.5s linear, left 0.5s linear;
+}
+
+.path {
+  position: absolute;
+  background-color: yellow;
+  z-index: -1;
+}
+
+.path.vertical {
+  width: 40px;
+}
+
+.path.horizontal {
+  height: 40px;
+}

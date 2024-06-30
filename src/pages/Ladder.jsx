@@ -1,8 +1,15 @@
+import "./css/ladder.css";
+import LadderGame from "../components/ladder/LadderGame";
+import Ranking from "../components/ranking/Ranking";
+
 const Ladder = () => {
   return (
-    <div style={{color:"white"}}>
-      사다리 게임
-    </div>
+    <main className="ladder">
+      <section className="container">
+        <LadderGame />
+        <Ranking/>
+      </section>
+    </main>
   )
 }
 
