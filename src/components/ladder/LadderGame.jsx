@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './css/LadderGame.css';
 import LadderInner from './LadderInner';
 
+
 function LadderGame() {
   const [result, setResult] = useState(null);
   const [resetKey, setResetKey] = useState(0);

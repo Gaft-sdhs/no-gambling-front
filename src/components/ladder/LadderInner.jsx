@@ -30,16 +30,19 @@ const LadderInner = ({ result, startSide, setAnimationFinished, gameStarted }) =
         const newPath = [];
 
         ladderPositions.forEach((pos, index) => {
-          // Move vertically to the horizontal ladder
-          intervals.push({
-            top: `${pos}%`,
-            left: currentPosition % 2 === 0 ? "0%" : "calc(100% - 40px)",
-          });
-          newPath.push({
-            top: `${pos}%`,
-            left: currentPosition % 2 === 0 ? "0%" : "calc(100% - 40px)",
-            type: "vertical",
-          });
+          // Skip the first vertical move if starting on the right
+          if (!(startSide === "right" && index === 0)) {
+            // Move vertically to the horizontal ladder
+            intervals.push({
+              top: `${pos}%`,
+              left: currentPosition % 2 === 0 ? "0%" : "calc(100% - 40px)",
+            });
+            newPath.push({
+              top: `${pos}%`,
+              left: currentPosition % 2 === 0 ? "0%" : "calc(100% - 40px)",
+              type: "vertical",
+            });
+          }
 
           // Move horizontally
           intervals.push({
@@ -107,17 +110,10 @@ const LadderInner = ({ result, startSide, setAnimationFinished, gameStarted }) =
   return (
     <div className="ladder-container" ref={ladderRef}>
       <div className="line vertical" style={{ left: "0%" }}></div>
-      <div
-        className="line vertical"
-        style={{ left: "calc(100% - 40px)" }}
-      ></div>
+      <div className="line vertical" style={{ left: "calc(100% - 40px)" }}></div>
       {gameStarted &&
         ladderPositions.map((pos, index) => (
-          <div
-            key={index}
-            className="line horizontal"
-            style={{ top: `${pos}%` }}
-          ></div>
+          <div key={index} className="line horizontal" style={{ top: `${pos}%` }}></div>
         ))}
       {path.map((p, index) => (
         <div
@@ -132,11 +128,7 @@ const LadderInner = ({ result, startSide, setAnimationFinished, gameStarted }) =
         ></div>
       ))}
       {isPlaying && (
-        <div
-          className="player"
-          ref={playerRef}
-          style={{ top: position.top, left: position.left }}
-        ></div>
+        <div className="player" ref={playerRef} style={{ top: position.top, left: position.left }}></div>
       )}
     </div>
   );
