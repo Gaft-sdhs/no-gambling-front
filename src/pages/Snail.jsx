@@ -12,11 +12,13 @@ import "./css/snail.css";
 const snailImages = [snailImage1, snailImage2, snailImage3];
 
 const Snail = () => {
-  const [snails] = useState(["1", "2", "3"]);
-  const [positions, setPositions] = useState([14, 14, 14]); // 시작 위치 조정
+  const [snails] = useState(['1', '2', '3']);
+  const [positions, setPositions] = useState([16, 16, 16]); // 시작 위치 조정
   const [isRacing, setIsRacing] = useState(false);
   const [speeds, setSpeeds] = useState([0, 0, 0]);
   const [intervalId, setIntervalId] = useState(null);
+  const [voteCounts, setVoteCounts] = useState([0, 0, 0]); // 투표 수 저장 배열
+  const [selectedVote, setSelectedVote] = useState(null); // 선택된 투표 저장 상태
 
   const getRandomSpeed = () => Math.random() * 4 + 4; // 2초에서 7초 사이의 랜덤 속도
 
@@ -24,7 +26,7 @@ const Snail = () => {
     const newSpeeds = snails.map(() => getRandomSpeed());
     setSpeeds(newSpeeds);
     setIsRacing(true);
-    setPositions([14, 14, 14]); // 시작 위치 조정
+    setPositions([16, 16, 16]); // 시작 위치 조정
 
     const id = setInterval(() => {
       const updatedSpeeds = snails.map(() => getRandomSpeed());
@@ -35,6 +37,14 @@ const Snail = () => {
     setTimeout(() => {
       setPositions([80, 80, 80]); // 끝나는 위치 조정
     }, 100);
+  };
+  const handleVote = (index) => {
+    if (!isRacing) {
+      setSelectedVote(index);
+      const newVoteCounts = [...voteCounts];
+      newVoteCounts[index] += 1;
+      setVoteCounts(newVoteCounts);
+    }
   };
 
   useEffect(() => {
@@ -49,7 +59,7 @@ const Snail = () => {
   }, [intervalId, positions, snails, speeds]);
 
   const resetRace = () => {
-    setPositions([14, 14, 14]); // 시작 위치 리셋
+    setPositions([16, 16, 16]); // 시작 위치 리셋
     setSpeeds([0, 0, 0]);
     setIsRacing(false);
   };
@@ -65,12 +75,15 @@ const Snail = () => {
               snailPng={snailImages[index]}
               position={positions[index]}
               speed={speeds[index]}
-              top={index * 15 + 45} // 간격 조정 및 위치 내리기
+              top={index *20 + 45} // 간격 조정 및 위치 내리기
             />
           ))}
-          <button onClick={startRace} disabled={isRacing}>
-            Start Race
-          </button>
+          <div className="button-container">
+            <button className={selectedVote === 0 ? "vote-button selected-red" : "vote-button"} onClick={() => handleVote(0)}>1번 달팽이</button>
+            <button className={selectedVote === 1 ? "vote-button selected-green" : "vote-button"} onClick={() => handleVote(1)}>2번 달팽이</button>
+            <button className={selectedVote === 2 ? "vote-button selected-blue" : "vote-button"} onClick={() => handleVote(2)}>3번 달팽이</button>
+            <button className="start-button" onClick={startRace} disabled={isRacing}>Start Race</button>
+          </div>
         </div>
         <Ranking/>
       </section>
