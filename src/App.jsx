@@ -6,7 +6,7 @@ import Index from "./pages/Index";
 import Snail from "./pages/Snail";
 import Ladder from "./pages/Ladder";
 import PowerBall from "./pages/PowerBall";
-import MobileWarning from "../src/components/MobileWarning/MobileWarning.jsx";
+import LossWarning from "../src/components/LossWarning/LossWarning.jsx"; // 컴포넌트 이름 수정
 import "./css/index.css";
 
 function App() {
@@ -28,9 +28,21 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowModal(true);
+    }, 6000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
-      {showModal && <MobileWarning />}
+      {showModal && <LossWarning onClose={closeModal} />}
       <Header />
       <Routes>
         <Route path="/" element={<Index />} />

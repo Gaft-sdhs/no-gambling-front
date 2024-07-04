@@ -1,0 +1,49 @@
+/* src/components/LossWarning/LossWarning.css */
+
+.loss-warning {
+  height: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* 최상단으로 설정 */
+  width: 800px; /* 모달 너비 설정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.loss-warning .modal-content {
+  position: relative;
+}
+
+.loss-warning .modal-content .close {
+  position: absolute;
+  top: 10px; /* 수정: 상단 여백 조정 */
+  right: 10px; /* 수정: 우측 여백 조정 */
+  cursor: pointer;
+  font-size: 20px;
+  color: #aaa;
+}
+
+.loss-warning .modal-content p {
+  margin: 0;
+}
+
+/* 배경 애니메이션 */
+@keyframes changeBackground {
+  0%, 100% {
+    background-image: url('./IMG_1921.jpg');
+  }
+  50% {
+    background-image: url('./IMG_4663.jpg');
+  }
+}
+
+.loss-warning {
+  animation: changeBackground 10s infinite; /* 10초 간격으로 반복 */
+  background-image: url('./IMG_1921.jpg'); /* 초기 배경 설정 */
+  background-size: cover; /* 배경 크기 조절 */
+}
