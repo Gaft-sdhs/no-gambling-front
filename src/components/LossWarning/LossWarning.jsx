@@ -1,16 +1,18 @@
-// src/components/LossWarning/LossWarning.jsx
+import React, { useState } from "react";
+import "./LossWarning.css";
 
-import React from 'react';
-import './LossWarning.css';
+const LossWarning = () => {
+  const [showWarning, setShowWarning] = useState(true); // 항상 보이도록 초기 설정
 
-const LossWarning = ({ onClose }) => {
+  const handleCloseWarning = () => {
+    setShowWarning(false);
+  };
+
   return (
-    <div className="loss-warning">
+    <div className={`loss-warning ${showWarning ? 'show' : ''}`}>
       <div className="modal-content">
-        <span className="close" onClick={onClose}>&times;</span>
-        <p>충동 적인 행동으로 소중한<br></br>
-            자산을 잃고있습다.
-        </p>
+        <span className="close" onClick={handleCloseWarning}>&times;</span>
+        <p>소중한 자산을 잃으셨습니다. 조심하세요!</p>
       </div>
     </div>
   );
