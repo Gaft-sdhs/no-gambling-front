@@ -14,33 +14,44 @@ const snailImages = [snailImage1, snailImage2, snailImage3];
 
 const Snail = () => {
   const [showBetModal, setShowBetModal] = useState(false);
-  const [selectedSnail, setSelectedSnail] = useState(null); // 선택된 달팽이 번호 저장 상태
+  const [selectedSnail, setSelectedSnail] = useState(null);
   const [snails] = useState(["1", "2", "3"]);
-  const [positions, setPositions] = useState([14, 14, 14]); // 시작 위치 조정
+  const [positions, setPositions] = useState([14, 14, 14]);
   const [isRacing, setIsRacing] = useState(false);
   const [speeds, setSpeeds] = useState([0, 0, 0]);
   const [intervalId, setIntervalId] = useState(null);
-  const [voteCounts, setVoteCounts] = useState([0, 0, 0]); // 투표 수 저장 배열
-  const [selectedVote, setSelectedVote] = useState(null); // 선택된 투표 저장 상태
-  const [user, setUser] = useState({ name: '사용자 이름', assets: 100 }); // 사용자 정보 상태
-  const [currentBet, setCurrentBet] = useState('+'); // 현재 선택된 배팅 설명 상태
+  const [voteCounts, setVoteCounts] = useState([0, 0, 0]);
+  const [selectedVote, setSelectedVote] = useState(null);
+  const [user, setUser] = useState({
+    name: '사용자 이름',
+    money: parseInt(localStorage.getItem('userAssets')) || 100,
+  });
+  const [currentBet, setCurrentBet] = useState('+');
+  const [betData, setBetData] = useState(null);
 
-  const getRandomSpeed = () => Math.random() * 4 + 4; // 2초에서 7초 사이의 랜덤 속도
+  useEffect(() => {
+    const storedMoney = parseInt(localStorage.getItem('userAssets'));
+    if (storedMoney) {
+      setUser((prevUser) => ({ ...prevUser, money: storedMoney }));
+    }
+  }, []);
+
+  const getRandomSpeed = () => Math.random() * 4 + 4;
 
   const startRace = () => {
     const newSpeeds = snails.map(() => getRandomSpeed());
     setSpeeds(newSpeeds);
     setIsRacing(true);
-    setPositions([14, 14, 14]); // 시작 위치 조정
+    setPositions([14, 14, 14]);
 
     const id = setInterval(() => {
       const updatedSpeeds = snails.map(() => getRandomSpeed());
       setSpeeds(updatedSpeeds);
-    }, 1000); // 1초마다 속도를 랜덤하게 변경
+    }, 1000);
     setIntervalId(id);
 
     setTimeout(() => {
-      setPositions([80, 80, 80]); // 끝나는 위치 조정
+      setPositions([80, 80, 80]);
     }, 100);
   };
 
@@ -50,13 +61,14 @@ const Snail = () => {
       const winner = snails[speeds.indexOf(Math.min(...speeds))];
       setTimeout(() => {
         alert(`${winner} 달팽이가 이겼습니다!`);
+        handleBetResult(winner);
         resetRace();
-      }, 8000); // 7초 뒤에 alert 창 띄우기
+      }, 8000);
     }
-  }, [intervalId, positions, snails, speeds]);
+  }, [positions]);
 
   const resetRace = () => {
-    setPositions([14, 14, 14]); // 시작 위치 리셋
+    setPositions([14, 14, 14]);
     setSpeeds([0, 0, 0]);
     setIsRacing(false);
   };
@@ -64,16 +76,28 @@ const Snail = () => {
   const handleVote = (index) => {
     if (!isRacing) {
       setSelectedVote(index);
-      const newVoteCounts = [...voteCounts];
-      newVoteCounts[index] += 1;
-      setVoteCounts(newVoteCounts);
+      setSelectedSnail(index);
+      setShowBetModal(true);
     }
   };
 
   const placeBet = (amount) => {
-    // 여기서 베팅 처리 로직 구현
-    console.log(`베팅 금액: ${amount}`);
-    // 베팅 처리 로직을 작성하고 필요한 상태 업데이트를 수행하세요.
+    setBetData({ snailIndex: selectedSnail, amount });
+    const newMoney = user.money - amount;
+    setUser((prevUser) => ({ ...prevUser, money: newMoney }));
+    localStorage.setItem('userAssets', newMoney);
+    setShowBetModal(false);
+  };
+
+  const handleBetResult = (winner) => {
+    if (betData) {
+      if (betData.snailIndex === parseInt(winner) - 1) {
+        const newMoney = user.money + betData.amount * 2;
+        setUser((prevUser) => ({ ...prevUser, money: newMoney }));
+        localStorage.setItem('userAssets', newMoney);
+      }
+      setBetData(null);
+    }
   };
 
   return (
@@ -88,7 +112,7 @@ const Snail = () => {
               snailPng={snailImages[index]}
               position={positions[index]}
               speed={speeds[index]}
-              top={index * 15 + 45} // 간격 조정 및 위치 내리기
+              top={index * 15 + 45}
             />
           ))}
           <div className="button-container">
@@ -98,15 +122,15 @@ const Snail = () => {
             <button className="start-button" onClick={startRace} disabled={isRacing}>Start Race</button>
           </div>
         </div>
-        <Ranking/>
+        <Ranking />
       </section>
       {showBetModal && (
         <BetModal
-          user={user} // 사용자 정보 전달
-          currentBet={currentBet} // 현재 선택된 배팅 설명 전달
-          placeBet={placeBet} // 베팅 처리 함수 전달
-          setShowBetModal={setShowBetModal} // 모달 상태 변경 함수 전달
-          snailIndex={selectedSnail} // 선택된 달팽이 번호 전달
+          user={user}
+          currentBet={currentBet}
+          placeBet={placeBet}
+          setShowBetModal={setShowBetModal}
+          snailIndex={selectedSnail}
         />
       )}
     </main>

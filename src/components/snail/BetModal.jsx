@@ -8,23 +8,19 @@ const BetModal = ({ user, currentBet, placeBet, setShowBetModal, snailIndex }) =
       alert('올바른 베팅 금액을 입력하세요.');
       return;
     }
-    if (parseInt(betAmount) > user.assets) {
+    if (parseInt(betAmount) > user.money) {
       alert('자산보다 많은 금액을 배팅할 수 없습니다.');
       return;
     }
-    
-    // 베팅 금액과 선택된 달팽이 인덱스를 로컬 스토리지에 저장
-    const betData = { snailIndex, amount: parseInt(betAmount) };
-    localStorage.setItem('snailBet', JSON.stringify(betData));
 
     placeBet(parseInt(betAmount));
     setShowBetModal(false);
   };
 
   const explanation = {
-    '+': '합계 값보다 더 크다고 예측합니다.',
-    '-': '합계 값보다 더 작다고 예측합니다.',
-    '=': '합계 값과 같다고 예측합니다.',
+    '+': '1 달팽이 에게 예측합니다.',
+    '-': '2 달팽이 에게 예측합니다.',
+    '=': '3 달팽이 에게 예측합니다.',
   }[currentBet];
 
   return (
@@ -33,7 +29,7 @@ const BetModal = ({ user, currentBet, placeBet, setShowBetModal, snailIndex }) =
         <span className="close" onClick={() => setShowBetModal(false)}>&times;</span>
         <h2>배팅하기</h2>
         <p>사용자: <span id="userName">{user.name}</span></p>
-        <p>자산: $<span id="userAssets">{user.assets}</span></p>
+        <p>자산: $<span id="userAssets">{user.money}</span></p>
         <p id="betExplanation">{explanation}</p>
         <input 
           type="number" 
