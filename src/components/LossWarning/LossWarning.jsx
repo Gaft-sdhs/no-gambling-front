@@ -12,7 +12,9 @@ const LossWarning = () => {
     <div className={`loss-warning ${showWarning ? 'show' : ''}`}>
       <div className="modal-content">
         <span className="close" onClick={handleCloseWarning}>&times;</span>
-        <p>소중한 자산을 잃으셨습니다. 조심하세요!</p>
+        <p>현재 접속하신 사이트는<br></br>
+        용산경찰 분들과 함께
+        <br></br>하는 도박 방지 캠페인입니다.</p>
       </div>
     </div>
   );
