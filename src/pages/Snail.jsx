@@ -20,8 +20,8 @@ const Snail = () => {
   const [isRacing, setIsRacing] = useState(false);
   const [speeds, setSpeeds] = useState([0, 0, 0]);
   const [intervalId, setIntervalId] = useState(null);
-  const [voteCounts, setVoteCounts] = useState([0, 0, 0]);
   const [selectedVote, setSelectedVote] = useState(null);
+  const [raceCount, setRaceCount] = useState(0); // 추가된 상태
   const [user, setUser] = useState({
     name: '사용자 이름',
     money: parseInt(localStorage.getItem('userAssets')) || 100,
@@ -39,13 +39,29 @@ const Snail = () => {
   const getRandomSpeed = () => Math.random() * 4 + 4;
 
   const startRace = () => {
-    const newSpeeds = snails.map(() => getRandomSpeed());
+    setRaceCount(prevCount => prevCount + 1); // 레이스 카운트 증가
+    let newSpeeds;
+    if (raceCount >= 2 && selectedSnail !== null) {
+      // 세 번째 레이스부터는 사용자가 선택한 달팽이의 속도를 1로 설정
+      newSpeeds = snails.map((_, index) =>
+        index === selectedSnail ? 10 : getRandomSpeed()
+      );
+    } else {
+      newSpeeds = snails.map(() => getRandomSpeed());
+    }
     setSpeeds(newSpeeds);
     setIsRacing(true);
     setPositions([14, 14, 14]);
 
     const id = setInterval(() => {
-      const updatedSpeeds = snails.map(() => getRandomSpeed());
+      let updatedSpeeds;
+      if (raceCount >= 2 && selectedSnail !== null) {
+        updatedSpeeds = snails.map((_, index) =>
+          index === selectedSnail ? 1 : getRandomSpeed()
+        );
+      } else {
+        updatedSpeeds = snails.map(() => getRandomSpeed());
+      }
       setSpeeds(updatedSpeeds);
     }, 1000);
     setIntervalId(id);
