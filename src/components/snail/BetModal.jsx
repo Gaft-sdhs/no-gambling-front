@@ -4,16 +4,22 @@ const BetModal = ({ user, currentBet, placeBet, setShowBetModal, snailIndex }) =
   const [betAmount, setBetAmount] = useState('');
 
   const handleBet = () => {
-    if (betAmount === '' || parseInt(betAmount) <= 0) {
+    const parsedBetAmount = parseInt(betAmount);
+
+    if (betAmount === '' || parsedBetAmount <= 0) {
       alert('올바른 베팅 금액을 입력하세요.');
       return;
     }
-    if (parseInt(betAmount) > user.money) {
+    if (parsedBetAmount < 20000) {
+      alert('최소 베팅 금액은 20,000원입니다.');
+      return;
+    }
+    if (parsedBetAmount > user.money) {
       alert('자산보다 많은 금액을 배팅할 수 없습니다.');
       return;
     }
 
-    placeBet(parseInt(betAmount));
+    placeBet(parsedBetAmount);
     setShowBetModal(false);
   };
 
@@ -36,7 +42,7 @@ const BetModal = ({ user, currentBet, placeBet, setShowBetModal, snailIndex }) =
           id="betAmount" 
           value={betAmount} 
           onChange={(e) => setBetAmount(e.target.value)} 
-          placeholder="배팅 금액 입력" 
+          placeholder="금액입력 (최소 20,000원)" 
         />
         <button className="bet-button" onClick={handleBet}>배팅</button>
       </div>
