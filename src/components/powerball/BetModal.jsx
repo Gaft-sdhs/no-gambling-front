@@ -24,9 +24,9 @@ const BetModal = ({ user, currentBet, placeBet, setShowBetModal, snailIndex }) =
   };
 
   const explanation = {
-    '+': '1 달팽이 에게 예측합니다.',
-    '-': '2 달팽이 에게 예측합니다.',
-    '=': '3 달팽이 에게 예측합니다.',
+    '+': '타켓값이 다 더한 값 보다 크다고 예측합니다.',
+    '-': '타켓값이 다 더한 값 보다 작다고 예측합니다.',
+    '=': '타켓값이 다 더한 값 보다 같다고 예측합니다.',
   }[currentBet];
 
   return (
