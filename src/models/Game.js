@@ -3,6 +3,7 @@ class Game {
   constructor(user) {
     this.user = user;
     this.resetGame(); // 게임 초기화
+    this.userWinCount = 0; // 사용자의 승리 횟수 초기화
   }
 
   // 게임 초기화 메서드
@@ -29,19 +30,18 @@ class Game {
     ];
   }
 
-// 게임 시작 메서드
+  // 게임 시작 메서드
   startGame() {
-  this.gameTimer = 60;
-  this.hasBet = false;
-  this.targetValue = Math.floor(Math.random() * 30) + 1;
-  this.values = this.generateRandomValues();
-  this.setBars(); // 바 업데이트
+    this.gameTimer = 60;
+    this.hasBet = false;
+    this.targetValue = Math.floor(Math.random() * 30) + 1;
+    this.values = this.generateRandomValues();
+    this.setBars(); // 바 업데이트
 
-  // 1부터 9까지의 세 개의 랜덤 숫자 합계 출력
-  console.log(`랜덤 값들: ${this.values.slice(1).join(', ')}`);
-  console.log(`랜덤 값의 합계: ${this.values.slice(1).reduce((acc, val) => acc + val, 0)}`);
-}
-
+    // 1부터 9까지의 세 개의 랜덤 숫자 합계 출력
+    console.log(`랜덤 값들: ${this.values.slice(1).join(', ')}`);
+    console.log(`랜덤 값의 합계: ${this.values.slice(1).reduce((acc, val) => acc + val, 0)}`);
+  }
 
   // 바 업데이트 메서드
   setBars() {
@@ -64,7 +64,28 @@ class Game {
     const value1 = Math.floor(Math.random() * 9) + 1;
     const value2 = Math.floor(Math.random() * 9) + 1;
     const value3 = Math.floor(Math.random() * 9) + 1;
-    const result = value1 + value2 + value3;
+    let result = value1 + value2 + value3;
+
+    // 사용자가 3번 이길 때까지 결과를 조작
+    if (this.userWinCount < 3) {
+      if (this.currentBet === "+") {
+        result = this.targetValue + 1;
+      } else if (this.currentBet === "-") {
+        result = this.targetValue - 1;
+      } else if (this.currentBet === "=") {
+        result = this.targetValue;
+      }
+      this.userWinCount++;
+    } else {
+      // 사용자가 계속 지도록 결과를 조작
+      if (this.currentBet === "+") {
+        result = this.targetValue - 1;
+      } else if (this.currentBet === "-") {
+        result = this.targetValue + 1;
+      } else if (this.currentBet === "=") {
+        result = this.targetValue + 1; // 평소에 '=' 배팅이 맞지 않도록 설정
+      }
+    }
 
     this.values = [this.targetValue, value1, value2, value3];
 
@@ -98,7 +119,9 @@ class Game {
       alert(message);
       this.startResultTimer();
     }, 1000);
-  } // 결과 타이머 시작 메서드
+  }
+
+  // 결과 타이머 시작 메서드
   startResultTimer() {
     this.resultTimer = 30;
   }

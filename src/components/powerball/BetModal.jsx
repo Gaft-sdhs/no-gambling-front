@@ -34,8 +34,9 @@ const BetModal = ({ user, currentBet, placeBet, setShowBetModal, snailIndex }) =
       <div className="modal-content">
         <span className="close" onClick={() => setShowBetModal(false)}>&times;</span>
         <h2>배팅하기</h2>
-        <p>사용자: <span id="userName">{user.name}</span></p>
-        <p>자산: $<span id="userAssets">{user.money}</span></p>
+        {/* <p>사용자: <span id="userName">{user.name}</span></p>
+        <p>자산: $<span id="userAssets">{user.money}</span></p> */
+        }
         <p id="betExplanation">{explanation}</p>
         <input 
           type="number" 
@@ -51,3 +52,5 @@ const BetModal = ({ user, currentBet, placeBet, setShowBetModal, snailIndex }) =
 };
 
 export default BetModal;
+
+
