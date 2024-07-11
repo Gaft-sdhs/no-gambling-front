@@ -1,3 +1,5 @@
+// 게임 상태를 관리하는 커스텀 훅
+
 import { useState, useEffect, useCallback } from 'react';
 import User from '../models/User';
 import Game from '../models/Game';
@@ -21,11 +23,13 @@ const useGameState = () => {
 
   useBars(setBars, game);
 
+  // 현재 배팅을 업데이트하는 함수
   const updateCurrentBet = (bet) => {
     setCurrentBet(bet);
-    game.currentBet = bet; 
+    game.currentBet = bet;
   };
 
+  // 게임을 시작하는 함수
   const startGame = () => {
     game.startGame();
     setTime(game.gameTimer);
@@ -35,12 +39,14 @@ const useGameState = () => {
     setIsGameRunning(true);
   };
 
+  // 결과 타이머를 시작하는 함수
   const startResultTimer = () => {
     setTime(game.resultTimer);
     setIsGameRunning(false);
     setShowResults(true);
   };
 
+  // 배팅을 처리하는 함수
   const placeBet = (amount) => {
     game.placeBet(amount);
     setHasBet(game.hasBet);
@@ -48,11 +54,13 @@ const useGameState = () => {
     setShowBetModal(game.showBetModal);
   };
 
+  // 튜토리얼 완료를 처리하는 함수
   const completeTutorial = () => {
     user.completeTutorial();
     setShowTutorialModal(false);
   };
 
+  // 시간이 종료되었을 때 처리하는 함수
   const handleTimeEnd = useCallback(() => {
     if (isGameRunning) {
       game.endGame();
@@ -83,7 +91,7 @@ const useGameState = () => {
   return {
     user,
     currentBet,
-    updateCurrentBet, // 수정된 함수 반환
+    updateCurrentBet,
     betAmount,
     hasBet,
     time,

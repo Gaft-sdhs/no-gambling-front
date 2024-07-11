@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-// useTimer 훅 정의
+// useTimer 훅: 초기 시간과 콜백 함수를 받아 타이머를 관리
 const useTimer = (initialTime, callback) => {
   // 초기 시간 설정
   const [time, setTime] = useState(initialTime);
@@ -15,6 +15,7 @@ const useTimer = (initialTime, callback) => {
         return 0; // 시간 0으로 설정
       });
     }, 1000);
+
     // 컴포넌트 언마운트 시 인터벌 정리
     return () => clearInterval(interval);
   }, [callback]);

@@ -1,3 +1,5 @@
+// 랭킹 페이지의 내부 리스트를 렌더링하는 컴포넌트
+
 import "./css/RankingInner.css";
 import RankingInnerItem from "./RankingInnerItem";
 import { LeaderBoardChange } from "./Ranking";
@@ -19,6 +21,7 @@ const mockData1 = [
   { rank: 5, name: "김X렐", money: 9103270000 },
 ];
 
+// 금액을 형식화하는 함수
 const formatMoney = (amount) => {
   return amount.toLocaleString('ko-KR', {
     style: 'currency',
@@ -26,6 +29,7 @@ const formatMoney = (amount) => {
   });
 };
 
+// RankingLeaderBoard 컴포넌트: 사용자와 전체 랭킹을 표시
 const RankingLeaderBoard = () => {
   const [user, setUser] = useState({ rank: 404, name: "나", money: 0 });
   const [user1, setUser1] = useState({ rank: 501, name: "나", money: 0 });
@@ -56,25 +60,25 @@ const RankingLeaderBoard = () => {
   }, []);
 
   return (
-    <div className="ranking-leaderBoard">
-      <div className="leaderBoard-my">
-        <RankingInnerItem
-          type={"MY"}
-          {...(leaderboard ? user : user1)}
-          money={formatMoney(leaderboard ? user.money : user1.money)}
-        />
-      </div>
-      <div className="leaderBoard-all">
-        {(leaderboard ? mockData : mockData1).map((item) => (
+      <div className="ranking-leaderBoard">
+        <div className="leaderBoard-my">
           <RankingInnerItem
-            key={item.rank}
-            type={"ALL"}
-            {...item}
-            money={formatMoney(item.money)}
+              type={"MY"}
+              {...(leaderboard ? user : user1)}
+              money={formatMoney(leaderboard ? user.money : user1.money)}
           />
-        ))}
+        </div>
+        <div className="leaderBoard-all">
+          {(leaderboard ? mockData : mockData1).map((item) => (
+              <RankingInnerItem
+                  key={item.rank}
+                  type={"ALL"}
+                  {...item}
+                  money={formatMoney(item.money)}
+              />
+          ))}
+        </div>
       </div>
-    </div>
   );
 };
 

@@ -1,3 +1,5 @@
+// 파워볼 튜토리얼 모달 컴포넌트
+
 const TutorialModal = ({ currentSlide, setCurrentSlide, setShowTutorialModal, completeTutorial }) => {
   const slides = [
     {
@@ -14,26 +16,27 @@ const TutorialModal = ({ currentSlide, setCurrentSlide, setShowTutorialModal, co
     }
   ];
 
+  // 튜토리얼 완료 핸들러
   const handleCompleteTutorial = () => {
     completeTutorial();
     setShowTutorialModal(false);
   };
 
   return (
-    <div className="modal" style={{ display: 'flex' }}>
-      <div className="modal-content">
-        <span className="close" onClick={handleCompleteTutorial}>&times;</span>
-        <div className="tutorial-slide active">
-          <h2>{slides[currentSlide].title}</h2>
-          <p>{slides[currentSlide].content}</p>
-          {currentSlide < slides.length - 1 ? (
-            <button className="bet-button" onClick={() => setCurrentSlide(currentSlide + 1)}>다음</button>
-          ) : (
-            <button className="bet-button" onClick={handleCompleteTutorial}>완료</button>
-          )}
+      <div className="modal" style={{ display: 'flex' }}>
+        <div className="modal-content">
+          <span className="close" onClick={handleCompleteTutorial}>&times;</span>
+          <div className="tutorial-slide active">
+            <h2>{slides[currentSlide].title}</h2>
+            <p>{slides[currentSlide].content}</p>
+            {currentSlide < slides.length - 1 ? (
+                <button className="bet-button" onClick={() => setCurrentSlide(currentSlide + 1)}>다음</button>
+            ) : (
+                <button className="bet-button" onClick={handleCompleteTutorial}>완료</button>
+            )}
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 

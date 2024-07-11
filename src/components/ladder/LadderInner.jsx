@@ -1,8 +1,11 @@
+// 사다리 게임 내부 컴포넌트
+
 import React, { useEffect, useRef, useState } from "react";
 import "./css/ladder.css";
 
+// 랜덤 사다리 위치 생성 함수
 const generateRandomLadders = () => {
-  const numberOfLadders = Math.floor(Math.random() * 2) + 3; // 3 or 4
+  const numberOfLadders = Math.floor(Math.random() * 2) + 3; // 3 또는 4
   const ladderPositions = [];
   for (let i = 0; i < numberOfLadders; i++) {
     ladderPositions.push((i + 1) * (100 / (numberOfLadders + 1)));
@@ -10,6 +13,7 @@ const generateRandomLadders = () => {
   return ladderPositions;
 };
 
+// LadderInner 컴포넌트: 사다리 게임의 애니메이션 및 경로 설정
 const LadderInner = ({ result, startSide, setAnimationFinished, gameStarted }) => {
   const ladderRef = useRef(null);
   const playerRef = useRef(null);
@@ -25,12 +29,11 @@ const LadderInner = ({ result, startSide, setAnimationFinished, gameStarted }) =
     if (result) {
       setIsPlaying(true);
       const movePlayer = () => {
-        let currentPosition = startSide === "left" ? 0 : 1; // 0 for left, 1 for right
+        let currentPosition = startSide === "left" ? 0 : 1;
         const intervals = [];
         const newPath = [];
 
         ladderPositions.forEach((pos, index) => {
-          // Move vertically to the horizontal ladder
           intervals.push({
             top: `${pos}%`,
             left: currentPosition % 2 === 0 ? "0%" : "calc(100% - 40px)",
@@ -41,7 +44,6 @@ const LadderInner = ({ result, startSide, setAnimationFinished, gameStarted }) =
             type: "vertical",
           });
 
-          // Move horizontally
           intervals.push({
             top: `${pos}%`,
             left: currentPosition % 2 === 0 ? "calc(100% - 40px)" : "0%",
@@ -52,7 +54,6 @@ const LadderInner = ({ result, startSide, setAnimationFinished, gameStarted }) =
             type: "horizontal",
           });
 
-          // Move vertically down after crossing the horizontal ladder
           currentPosition += 1;
           if (index < ladderPositions.length - 1) {
             intervals.push({
@@ -67,7 +68,6 @@ const LadderInner = ({ result, startSide, setAnimationFinished, gameStarted }) =
           }
         });
 
-        // Move to the bottom of the ladder
         intervals.push({
           top: "100%",
           left: currentPosition % 2 === 0 ? "0%" : "calc(100% - 40px)",
@@ -105,29 +105,29 @@ const LadderInner = ({ result, startSide, setAnimationFinished, gameStarted }) =
   }, [result, startSide]);
 
   return (
-    <div className="ladder-container" ref={ladderRef}>
-      <div className="line vertical" style={{ left: "0%" }}></div>
-      <div className="line vertical" style={{ left: "calc(100% - 40px)" }}></div>
-      {gameStarted &&
-        ladderPositions.map((pos, index) => (
-          <div key={index} className="line horizontal" style={{ top: `${pos}%` }}></div>
+      <div className="ladder-container" ref={ladderRef}>
+        <div className="line vertical" style={{ left: "0%" }}></div>
+        <div className="line vertical" style={{ left: "calc(100% - 40px)" }}></div>
+        {gameStarted &&
+            ladderPositions.map((pos, index) => (
+                <div key={index} className="line horizontal" style={{ top: `${pos}%` }}></div>
+            ))}
+        {path.map((p, index) => (
+            <div
+                key={index}
+                className={`path ${p.type}`}
+                style={{
+                  top: p.type === "vertical" ? p.top : `calc(${p.top} - 20px)`,
+                  left: p.left,
+                  height: p.type === "vertical" ? "40px" : "20px",
+                  width: p.type === "horizontal" ? "100%" : "40px",
+                }}
+            ></div>
         ))}
-      {path.map((p, index) => (
-        <div
-          key={index}
-          className={`path ${p.type}`}
-          style={{
-            top: p.type === "vertical" ? p.top : `calc(${p.top} - 20px)`,
-            left: p.left,
-            height: p.type === "vertical" ? "40px" : "20px",
-            width: p.type === "horizontal" ? "100%" : "40px",
-          }}
-        ></div>
-      ))}
-      {isPlaying && (
-        <div className="player" ref={playerRef} style={{ top: position.top, left: position.left }}></div>
-      )}
-    </div>
+        {isPlaying && (
+            <div className="player" ref={playerRef} style={{ top: position.top, left: position.left }}></div>
+        )}
+      </div>
   );
 };
 

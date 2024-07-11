@@ -1,8 +1,11 @@
+// 사다리 게임 컴포넌트
+
 import React, { useState, useEffect } from 'react';
 import './css/LadderGame.css';
 import LadderInner from './LadderInner';
-import BetModal from './BetModal';
+import LadderBetModal from './LadderBetModal.jsx';
 
+// LadderGame 컴포넌트: 사다리 게임 로직 및 UI를 관리
 const LadderGame = () => {
   const [result, setResult] = useState(null);
   const [resetKey, setResetKey] = useState(0);
@@ -15,9 +18,9 @@ const LadderGame = () => {
     money: parseInt(localStorage.getItem('userAssets')) || 100,
   });
   const [showResult, setShowResult] = useState(false);
-  const [betPlaced, setBetPlaced] = useState(false); // 베팅 상태 추가
-  const [gameCount, setGameCount] = useState(0); // 게임 횟수 추가
-  const [buttonsDisabled, setButtonsDisabled] = useState(false); // 버튼 비활성화 상태 추가
+  const [betPlaced, setBetPlaced] = useState(false);
+  const [gameCount, setGameCount] = useState(0);
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
 
   useEffect(() => {
     const storedMoney = parseInt(localStorage.getItem('userAssets'));
@@ -26,8 +29,9 @@ const LadderGame = () => {
     }
   }, []);
 
+  // 게임 시작 핸들러
   const handleStartGame = () => {
-    if (!selected || betPlaced) return; // 선택하지 않았거나 베팅이 완료된 경우 실행 안함
+    if (!selected || betPlaced) return;
 
     const randomStartSide = Math.random() < 0.5 ? 'left' : 'right';
     setStartSide(randomStartSide);
@@ -44,8 +48,8 @@ const LadderGame = () => {
     setResult(randomResult);
     setGameStarted(true);
     setAnimationFinished(false);
-    setBetPlaced(true); // 베팅 상태 업데이트
-    setButtonsDisabled(true); // 버튼 비활성화 상태 업데이트
+    setBetPlaced(true);
+    setButtonsDisabled(true);
 
     setTimeout(() => {
       setAnimationFinished(true);
@@ -53,24 +57,27 @@ const LadderGame = () => {
     }, 2000);
 
     setTimeout(() => {
-      setButtonsDisabled(false); // 8초 후 버튼 비활성화 상태 해제
+      setButtonsDisabled(false);
     }, 8000);
   };
 
+  // 게임 리셋 핸들러
   const handleResetGame = () => {
     setResult(null);
     setStartSide('');
     setGameStarted(false);
     setResetKey((prevKey) => prevKey + 1);
     setShowResult(false);
-    setBetPlaced(false); // 베팅 상태 초기화
-    setGameCount((prevCount) => prevCount + 1); // 게임 횟수 증가
+    setBetPlaced(false);
+    setGameCount((prevCount) => prevCount + 1);
   };
 
+  // 베팅 모달 닫기 핸들러
   const handleBetModalClose = () => {
     setSelected(null);
   };
 
+  // 베팅 핸들러
   const handleBet = (amount) => {
     if (amount > user.money) {
       alert('자산보다 많은 금액을 배팅할 수 없습니다.');
@@ -78,7 +85,7 @@ const LadderGame = () => {
     }
 
     if (betPlaced) {
-      return; // 이미 배팅이 완료된 경우 실행 안함
+      return;
     }
 
     const outcomes = ['홀', '짝'];
@@ -92,7 +99,7 @@ const LadderGame = () => {
 
     setResult(randomResult);
     setAnimationFinished(true);
-    setBetPlaced(true); // 배팅 상태 업데이트
+    setBetPlaced(true);
 
     setTimeout(() => {
       if (randomResult === selected) {
@@ -111,54 +118,54 @@ const LadderGame = () => {
   };
 
   return (
-    <div className="LadderGame">
-      <div className="game-container">
-        <div className="con">
-          <div className="lf">출발</div>
-          <div className="rt">출발</div>
-        </div>
-        <LadderInner key={resetKey} result={result} startSide={startSide} gameStarted={true} />
-        <div className="endpoints">
-          <div className="hol">홀</div>
-          <div className="jjk">짝</div>
-        </div>
-        <div className="choice-container">
-          <div
-            className={`choice ${selected === '홀' ? 'selected' : ''}`}
-            onClick={() => !buttonsDisabled && setSelected('홀')}
-            disabled={buttonsDisabled} // 버튼 비활성화 조건 추가
-          >
-            홀
+      <div className="LadderGame">
+        <div className="game-container">
+          <div className="con">
+            <div className="lf">출발</div>
+            <div className="rt">출발</div>
           </div>
-          <div
-            className={`choice ${selected === '짝' ? 'selected' : ''}`}
-            onClick={() => !buttonsDisabled && setSelected('짝')}
-            disabled={buttonsDisabled} // 버튼 비활성화 조건 추가
-          >
-            짝
+          <LadderInner key={resetKey} result={result} startSide={startSide} gameStarted={true} />
+          <div className="endpoints">
+            <div className="hol">홀</div>
+            <div className="jjk">짝</div>
           </div>
+          <div className="choice-container">
+            <div
+                className={`choice ${selected === '홀' ? 'selected' : ''}`}
+                onClick={() => !buttonsDisabled && setSelected('홀')}
+                disabled={buttonsDisabled}
+            >
+              홀
+            </div>
+            <div
+                className={`choice ${selected === '짝' ? 'selected' : ''}`}
+                onClick={() => !buttonsDisabled && setSelected('짝')}
+                disabled={buttonsDisabled}
+            >
+              짝
+            </div>
+          </div>
+          <button onClick={handleStartGame} className="start-button" disabled={!selected || betPlaced || buttonsDisabled}>게임 시작</button>
         </div>
-        <button onClick={handleStartGame} className="start-button" disabled={!selected || betPlaced || buttonsDisabled}>게임 시작</button>
+        {result && animationFinished && showResult && (
+            <div className="result-alert">
+              {result === selected ? (
+                  <p className="result-text">축하합니다! {result} 입니다.</p>
+              ) : (
+                  <p className="result-text">아쉽게도 정답은 {result} 이였습니다.</p>
+              )}
+              <button onClick={handleResetGame} className="result-reset-button">게임 다시하기</button>
+            </div>
+        )}
+        {selected !== null && !gameStarted && (
+            <LadderBetModal
+                user={user}
+                placeBet={handleBet}
+                setShowBetModal={handleBetModalClose}
+                buttonsDisabled={buttonsDisabled}
+            />
+        )}
       </div>
-      {result && animationFinished && showResult && (
-        <div className="result-alert">
-          {result === selected ? (
-            <p className="result-text">축하합니다! {result} 입니다.</p>
-          ) : (
-            <p className="result-text">아쉽게도 정답은 {result} 이였습니다.</p>
-          )}
-          <button onClick={handleResetGame} className="result-reset-button">게임 다시하기</button>
-        </div>
-      )}
-      {selected !== null && !gameStarted && (
-        <BetModal
-          user={user}
-          placeBet={handleBet}
-          setShowBetModal={handleBetModalClose}
-          buttonsDisabled={buttonsDisabled} // 베팅 버튼 비활성화 조건 추가
-        />
-      )}
-    </div>
   );
 };
 

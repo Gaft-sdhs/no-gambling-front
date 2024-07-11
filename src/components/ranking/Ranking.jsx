@@ -1,5 +1,7 @@
+// 랭킹 페이지를 렌더링하는 컴포넌트
+
 import "./css/ranking.css";
-import RankingHeader from "./RankingHedaer";
+import RankingHeader from "./RankingHeader";
 import RankingInner from "./RankingInner";
 import { useState, createContext } from "react";
 
@@ -11,22 +13,23 @@ const Ranking = () => {
   // true => totalMoney
   // false => pureMoney
 
-  const changeEvent = (dicrection)=>{
-    if(dicrection === "left")
+  // changeEvent 함수: 리더보드를 변경
+  const changeEvent = (direction) => {
+    if (direction === "left") {
       setLeaderBoard(true);
-    else
+    } else {
       setLeaderBoard(false);
+    }
   };
 
   return (
-    <div className="ranking">
-      <LeaderBoardChange.Provider value={{leaderboard, changeEvent}}>
-        <RankingHeader />
-        <RankingInner leaderboard={leaderboard}/>
-      </LeaderBoardChange.Provider>
-    </div>
+      <div className="ranking">
+        <LeaderBoardChange.Provider value={{ leaderboard, changeEvent }}>
+          <RankingHeader />
+          <RankingInner leaderboard={leaderboard} />
+        </LeaderBoardChange.Provider>
+      </div>
   );
-
 };
 
 export default Ranking;

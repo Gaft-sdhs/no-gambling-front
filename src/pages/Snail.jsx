@@ -1,8 +1,10 @@
+// Snail 레이스 페이지 컴포넌트
+
 import React, { useState, useEffect } from "react";
 import SnailRace from "../components/snail/SnailRace";
 import Ranking from "../components/ranking/Ranking";
 import TutorialModal from "../components/snail/TutorialModal";
-import BetModal from '../components/snail/BetModal';
+import SnailBetModal from '../components/snail/SnailBetModal.jsx';
 import snailImage1 from "../assets/1snail.png";
 import snailImage2 from "../assets/2snail.png";
 import snailImage3 from "../assets/3snail.png";
@@ -44,7 +46,7 @@ const Snail = () => {
     if (raceCount >= 2 && selectedSnail !== null) {
       // 세 번째 레이스부터는 사용자가 선택한 달팽이의 속도를 1로 설정
       newSpeeds = snails.map((_, index) =>
-        index === selectedSnail ? 10 : getRandomSpeed()
+          index === selectedSnail ? 10 : getRandomSpeed()
       );
     } else {
       newSpeeds = snails.map(() => getRandomSpeed());
@@ -57,7 +59,7 @@ const Snail = () => {
       let updatedSpeeds;
       if (raceCount >= 2 && selectedSnail !== null) {
         updatedSpeeds = snails.map((_, index) =>
-          index === selectedSnail ? 1 : getRandomSpeed()
+            index === selectedSnail ? 1 : getRandomSpeed()
         );
       } else {
         updatedSpeeds = snails.map(() => getRandomSpeed());
@@ -117,39 +119,39 @@ const Snail = () => {
   };
 
   return (
-    <main className="Snail">
-      <TutorialModal />
-      <section className="container">
-        <div className="race-track" style={{ backgroundImage: `url("${snailBg}")` }}>
-          {snails.map((snail, index) => (
-            <SnailRace
-              key={snail}
-              Index={index}
-              snailPng={snailImages[index]}
-              position={positions[index]}
-              speed={speeds[index]}
-              top={index * 15 + 45}
-            />
-          ))}
-          <div className="button-container">
-            <button className={selectedVote === 0 ? "vote-button selected-red" : "vote-button"} onClick={() => handleVote(0)}>1번 달팽이</button>
-            <button className={selectedVote === 1 ? "vote-button selected-green" : "vote-button"} onClick={() => handleVote(1)}>2번 달팽이</button>
-            <button className={selectedVote === 2 ? "vote-button selected-blue" : "vote-button"} onClick={() => handleVote(2)}>3번 달팽이</button>
-            <button className="start-button" onClick={startRace} disabled={isRacing}>Start Race</button>
+      <main className="Snail">
+        <TutorialModal />
+        <section className="container">
+          <div className="race-track" style={{ backgroundImage: `url("${snailBg}")` }}>
+            {snails.map((snail, index) => (
+                <SnailRace
+                    key={snail}
+                    snailIndex={index}
+                    snailPng={snailImages[index]}
+                    position={positions[index]}
+                    speed={speeds[index]}
+                    top={index * 15 + 45}
+                />
+            ))}
+            <div className="button-container">
+              <button className={selectedVote === 0 ? "vote-button selected-red" : "vote-button"} onClick={() => handleVote(0)}>1번 달팽이</button>
+              <button className={selectedVote === 1 ? "vote-button selected-green" : "vote-button"} onClick={() => handleVote(1)}>2번 달팽이</button>
+              <button className={selectedVote === 2 ? "vote-button selected-blue" : "vote-button"} onClick={() => handleVote(2)}>3번 달팽이</button>
+              <button className="start-button" onClick={startRace} disabled={isRacing}>Start Race</button>
+            </div>
           </div>
-        </div>
-        <Ranking />
-      </section>
-      {showBetModal && (
-        <BetModal
-          user={user}
-          currentBet={currentBet}
-          placeBet={placeBet}
-          setShowBetModal={setShowBetModal}
-          snailIndex={selectedSnail}
-        />
-      )}
-    </main>
+          <Ranking />
+        </section>
+        {showBetModal && (
+            <SnailBetModal
+                user={user}
+                currentBet={currentBet}
+                placeBet={placeBet}
+                setShowBetModal={setShowBetModal}
+                snailIndex={selectedSnail}
+            />
+        )}
+      </main>
   );
 };
 

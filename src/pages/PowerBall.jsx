@@ -1,6 +1,8 @@
+// PowerBall 페이지 컴포넌트
+
 import React, { useState } from "react";
 import Bars from "../components/powerball/Bars";
-import BetModal from "../components/powerball/BetModal";
+import PowerballBetModal from "../components/powerball/PowerballBetModal.jsx";
 import BettingArea from "../components/powerball/BettingArea";
 import Timer from "../components/powerball/Timer";
 import GamblingArea from "../components/powerball/GamblingArea";
@@ -14,7 +16,7 @@ const PowerBall = () => {
   const {
     user,
     currentBet,
-    updateCurrentBet, // updateCurrentBet 사용
+    updateCurrentBet,
     betAmount,
     hasBet,
     time,
@@ -37,42 +39,42 @@ const PowerBall = () => {
   const res = values.slice(1).reduce((acc, val) => acc + val, 0);
 
   return (
-    <main className="powerball">
-      <section className="container">
-        <Timer time={time} />
-        <GamblingArea
-          target={targetValue}
-          values={values}
-          showResults={showResults}
-          imageSrc={imageSrc}
-        />
-        <Bars bars={bars} />
-        <BettingArea
-          hasBet={hasBet}
-          updateCurrentBet={updateCurrentBet} // 수정된 함수 전달
-          setShowBetModal={setShowBetModal}
-          showResults={showResults}
-          res={res}
-        />
-        {showBetModal && (
-          <BetModal
-            user={user}
-            currentBet={currentBet}
-            placeBet={placeBet}
-            setShowBetModal={setShowBetModal}
+      <main className="powerball">
+        <section className="container">
+          <Timer time={time} />
+          <GamblingArea
+              target={targetValue}
+              values={values}
+              showResults={showResults}
+              imageSrc={imageSrc}
           />
-        )}
-        {showTutorialModal && (
-          <TutorialModal
-            currentSlide={currentSlide}
-            setCurrentSlide={setCurrentSlide}
-            setShowTutorialModal={setShowTutorialModal}
-            completeTutorial={completeTutorial}
+          <Bars bars={bars} />
+          <BettingArea
+              hasBet={hasBet}
+              updateCurrentBet={updateCurrentBet}
+              setShowBetModal={setShowBetModal}
+              showResults={showResults}
+              res={res}
           />
-        )}
-      </section>
-      <Ranking />
-    </main>
+          {showBetModal && (
+              <PowerballBetModal
+                  user={user}
+                  currentBet={currentBet}
+                  placeBet={placeBet}
+                  setShowBetModal={setShowBetModal}
+              />
+          )}
+          {showTutorialModal && (
+              <TutorialModal
+                  currentSlide={currentSlide}
+                  setCurrentSlide={setCurrentSlide}
+                  setShowTutorialModal={setShowTutorialModal}
+                  completeTutorial={completeTutorial}
+              />
+          )}
+        </section>
+        <Ranking />
+      </main>
   );
 };
 

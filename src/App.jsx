@@ -48,17 +48,17 @@ function App() {
   }, [lostCount]);
 
   return (
-    <>
-      {showModal && <LossWarning onClose={handleCloseModal} />}
-      <Header />
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/snail" element={<Snail />} />
-        <Route path="/Ladder" element={<Ladder />} />
-        <Route path="/Powerball" element={<PowerBall />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </>
+      <>
+        {showModal && <LossWarning onClose={handleCloseModal} />}
+        <Header />
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/snail" element={<Snail />} />
+          <Route path="/ladder" element={<Ladder />} />
+          <Route path="/powerball" element={<PowerBall />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </>
   );
 }
 

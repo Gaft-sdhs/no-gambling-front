@@ -1,4 +1,3 @@
-// src/components/MobileWarning.jsx
 import React from 'react';
 import './css/MobileWarning.css';
 
