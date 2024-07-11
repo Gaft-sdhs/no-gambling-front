@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
@@ -42,7 +42,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
   document.body.appendChild(installButton);
 
   installButton.addEventListener('click', () => {
-    
     // 설치 프롬프트를 트리거
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then((choiceResult) => {
