@@ -7,7 +7,7 @@
   flex-direction: row;
 
   justify-content: space-between;
-  padding: 0 15vw;
+  padding: 0 12vw;
 
   animation: onLanding 1.5s;
 }
@@ -27,10 +27,29 @@
   align-items: center;
   cursor: pointer;
 
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.MenuBtn {
+  cursor: pointer;
+  display: none;
+  background: none;
+  flex-direction: column;
+  outline: none;
+  justify-content: center;
+  gap: 0.6rem;
+  border: none;
+}
+
+.MenuBtn .bar {
+  display: inline-block;
+  background-color: white;
+  border-radius: 15px;
+  width: 4rem;
+  height: 0.5rem;
 }
 
 @keyframes onLanding {
@@ -39,5 +58,18 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@media (max-width: 918px) {
+  .nav {
+    display: none;
+  }
+  .MenuBtn {
+    display: flex;
+  }
+  .imgContainer {
+    width: 50vw;
+    height: 5.5rem;
   }
 }
