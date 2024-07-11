@@ -1,7 +1,7 @@
 {
   "name": "Jamondan",
   "short_name": "Jamondan",
-  "description": "My Awesome Progressive Web App!",
+  "description": "Jamondan",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -17,5 +17,29 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "id": "com.example.yourapp",
+  "launch_handler": {
+    "route_to": "new-navigation"
+  },
+  "orientation": "portrait",
+  "screenshots": [
+    {
+      "src": "/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "dir": "ltr",
+  "iarc_rating_id": "e4b1cfa7-e3e1-4b1d-8ec4-589e0d8eb9b0",
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://example.com/manifest.json"
+    }
+  ],
+  "scope": "/",
+  "lang": "en-US"
 }
