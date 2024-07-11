@@ -5,19 +5,16 @@ import BettingArea from "../components/powerball/BettingArea";
 import Timer from "../components/powerball/Timer";
 import GamblingArea from "../components/powerball/GamblingArea";
 import TutorialModal from "../components/powerball/TutorialModal";
-
 import Ranking from "../components/ranking/Ranking";
-
 import useGameState from "../hooks/useGameState";
 import "./css/powerball.css";
-
 import imageSrc from "../assets/random.png";
 
 const PowerBall = () => {
   const {
     user,
     currentBet,
-    setCurrentBet,
+    updateCurrentBet, // updateCurrentBet 사용
     betAmount,
     hasBet,
     time,
@@ -33,7 +30,6 @@ const PowerBall = () => {
     completeTutorial,
     showResults,
     isGameRunning,
-    getBetExplanation,
   } = useGameState();
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -53,21 +49,16 @@ const PowerBall = () => {
         <Bars bars={bars} />
         <BettingArea
           hasBet={hasBet}
-          setCurrentBet={setCurrentBet}
+          updateCurrentBet={updateCurrentBet} // 수정된 함수 전달
           setShowBetModal={setShowBetModal}
           showResults={showResults}
           res={res}
-          placeBet={placeBet}
-          currentBet={currentBet}
-          targetValue={targetValue}
-          getBetExplanation={getBetExplanation}
         />
         {showBetModal && (
           <BetModal
             user={user}
             currentBet={currentBet}
             placeBet={placeBet}
-            setCurrentBet={setCurrentBet}
             setShowBetModal={setShowBetModal}
           />
         )}

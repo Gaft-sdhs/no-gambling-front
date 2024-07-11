@@ -3,6 +3,7 @@ class Game {
   constructor(user) {
     this.user = user;
     this.resetGame(); // 게임 초기화
+    this.userWinCount = 0; // 사용자의 승리 횟수 초기화
   }
 
   // 게임 초기화 메서드
@@ -36,6 +37,10 @@ class Game {
     this.targetValue = Math.floor(Math.random() * 30) + 1;
     this.values = this.generateRandomValues();
     this.setBars(); // 바 업데이트
+
+    // 1부터 9까지의 세 개의 랜덤 숫자 합계 출력
+    console.log(`랜덤 값들: ${this.values.slice(1).join(', ')}`);
+    console.log(`랜덤 값의 합계: ${this.values.slice(1).reduce((acc, val) => acc + val, 0)}`);
   }
 
   // 바 업데이트 메서드
@@ -50,7 +55,7 @@ class Game {
   // 게임 종료 메서드
   endGame() {
     if (!this.hasBet) {
-      alert('배팅을 하지 않았습니다.');
+      alert("배팅을 하지 않았습니다.");
       this.startResultTimer(); // 결과 타이머 시작
       return;
     }
@@ -59,26 +64,51 @@ class Game {
     const value1 = Math.floor(Math.random() * 9) + 1;
     const value2 = Math.floor(Math.random() * 9) + 1;
     const value3 = Math.floor(Math.random() * 9) + 1;
-    const result = value1 + value2 + value3;
+    let result = value1 + value2 + value3;
+
+    // 사용자가 3번 이길 때까지 결과를 조작
+    if (this.userWinCount < 3) {
+      if (this.currentBet === "+") {
+        result = this.targetValue + 1;
+      } else if (this.currentBet === "-") {
+        result = this.targetValue - 1;
+      } else if (this.currentBet === "=") {
+        result = this.targetValue;
+      }
+      this.userWinCount++;
+    } else {
+      // 사용자가 계속 지도록 결과를 조작
+      if (this.currentBet === "+") {
+        result = this.targetValue - 1;
+      } else if (this.currentBet === "-") {
+        result = this.targetValue + 1;
+      } else if (this.currentBet === "=") {
+        result = this.targetValue + 1; // 평소에 '=' 배팅이 맞지 않도록 설정
+      }
+    }
 
     this.values = [this.targetValue, value1, value2, value3];
 
+    console.log(`결과 값: ${result}`); // 결과 값을 콘솔에 출력
+
     let winAmount = 0;
-    let message = '';
+    let message = "";
 
     // 베팅 결과 처리
-    if (this.currentBet === '+' && result > this.targetValue) {
-      winAmount = this.betAmount * 2;  
+    console.log(`currentBet: ${this.currentBet}, result: ${result}, targetValue: ${this.targetValue}`);
+
+    if (this.currentBet === "+" && result > this.targetValue) {
+      winAmount = this.betAmount * 2;
       message = `성공! $${winAmount}를 얻었습니다.`;
-    } else if (this.currentBet === '-' && result < this.targetValue) {
-      winAmount = this.betAmount * 2;  
+    } else if (this.currentBet === "-" && result < this.targetValue) {
+      winAmount = this.betAmount * 2;
       message = `성공! $${winAmount}를 얻었습니다.`;
-    } else if (this.currentBet === '=' && result === this.targetValue) {
-      winAmount = this.betAmount * 3;  
+    } else if (this.currentBet === "=" && result === this.targetValue) {
+      winAmount = this.betAmount * 3;
       message = `성공! $${winAmount}를 얻었습니다.`;
     } else {
-      winAmount = -this.betAmount; 
-      message = `실패! $${Math.abs(winAmount)}를 잃었습니다.`;
+      winAmount = 0; // 틀렸을 때 추가 차감 없음
+      message = `실패! $${Math.abs(this.betAmount)}를 잃었습니다.`;
     }
 
     // 자산 업데이트
@@ -105,7 +135,7 @@ class Game {
       this.user.deductAssets(amount); // 자산 차감
       console.log(`Updated assets after bet: ${this.user.assets}`);
     } else {
-      alert('유효한 배팅 금액을 입력해주세요.');
+      alert("유효한 배팅 금액을 입력해주세요.");
     }
   }
 
