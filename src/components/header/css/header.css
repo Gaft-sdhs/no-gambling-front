@@ -68,4 +68,8 @@
   .MenuBtn {
     display: flex;
   }
+  .imgContainer {
+    width: 50vw;
+    height: 5.5rem;
+  }
 }
