@@ -7,7 +7,7 @@
   flex-direction: row;
 
   justify-content: space-between;
-  padding: 0 15vw;
+  padding: 0 12vw;
 
   animation: onLanding 1.5s;
 }
@@ -33,6 +33,25 @@
   user-select: none;
 }
 
+.MenuBtn {
+  cursor: pointer;
+  display: none;
+  background: none;
+  flex-direction: column;
+  outline: none;
+  justify-content: center;
+  gap: 0.6rem;
+  border: none;
+}
+
+.MenuBtn .bar {
+  display: inline-block;
+  background-color: white;
+  border-radius: 15px;
+  width: 4rem;
+  height: 0.5rem;
+}
+
 @keyframes onLanding {
   0% {
     opacity: 0.15;
@@ -42,8 +61,11 @@
   }
 }
 
-/* @media (max-width: 918px) {
+@media (max-width: 918px) {
   .nav {
     display: none;
   }
-} */
+  .MenuBtn {
+    display: flex;
+  }
+}
