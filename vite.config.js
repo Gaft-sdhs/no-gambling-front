@@ -10,19 +10,19 @@ export default defineConfig({
         name: 'Jamondan',
         short_name: 'Jamondan',
         description: '서울 용산 경찰서와 함께하는 도박 예방 캠페인',
-        start_url: '.',
+        start_url: '/',
         display: 'standalone',
         background_color: '#bcb4b4',
         theme_color: '#5a5555',
         icons: [
           {
-            "src": "android/android-launchericon-512-512.png",
-            "sizes": "512x512",
-            "type": "image/png"
+            src: 'android/android-launchericon-512-512.png',
+            sizes: '512x512',
+            type: 'image/png'
           }
         ],
         categories: [
-          "government"
+          'government'
         ]
       },
       workbox: {

@@ -1,33 +1,46 @@
-// service-worker.js
-
 self.addEventListener('install', event => {
   console.log('Service Worker installing.');
-  // Add a call to skipWaiting here if you want to trigger the service worker to take over the page immediately
-  // self.skipWaiting();
+  event.waitUntil(
+    caches.open('static-cache').then(cache => {
+      return cache.addAll([
+        './',
+        './index.html',
+        './manifest.webmanifest',
+        './android/android-launchericon-512-512.png',
+        // 다른 필요한 파일들
+      ]);
+    })
+  );
+  self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
   console.log('Service Worker activating.');
-  // Clean up old caches if necessary
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.filter(cacheName => {
+          return cacheName !== 'static-cache';
+        }).map(cacheName => {
+          return caches.delete(cacheName);
+        })
+      );
+    })
+  );
+  self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
-      return cachedResponse || fetch(event.request);
+      return cachedResponse || fetch(event.request).then(networkResponse => {
+        return caches.open('static-cache').then(cache => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+      });
     })
   );
-});
-
-// Offline Support
-self.addEventListener('fetch', event => {
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request).catch(() => {
-        return caches.match('offline.html');
-      })
-    );
-  }
 });
 
 // Push Notifications
@@ -58,7 +71,6 @@ self.addEventListener('sync', event => {
 });
 
 function doSomePeriodicSync() {
-  // Logic for periodic sync
   return fetch('/sync-endpoint').then(response => {
     return response.json();
   }).then(data => {
@@ -67,7 +79,6 @@ function doSomePeriodicSync() {
 }
 
 function doSomeBackgroundSync() {
-  // Logic for background sync
   return fetch('/sync-endpoint').then(response => {
     return response.json();
   }).then(data => {
