@@ -1,6 +1,11 @@
-const MenuBtn = () => {
+const MenuBtn = ({ Handler }) => {
   return (
-    <button className="MenuBtn">
+    <button
+      className="MenuBtn"
+      onClick={() => {
+        Handler();
+      }}
+    >
       <span className="bar"></span>
       <span className="bar"></span>
       <span className="bar"></span>

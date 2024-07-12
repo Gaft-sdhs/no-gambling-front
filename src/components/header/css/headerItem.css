@@ -15,7 +15,7 @@
 }
 
 .headerItem:hover > .underBar {
-  background-color: #CBD3FF;
+  background-color: #cbd3ff;
 }
 
 .headerItem > a {
@@ -26,6 +26,17 @@
 }
 
 .headerItem:hover > a {
-  color: #CBD3FF;
+  color: #cbd3ff;
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav.clicked .headerItem > a {
+  width: 100%;
+}
+.nav.clicked .headerItem > .underBar {
+  margin: 0.5rem;
+  height: 0.1rem;
+}
+.nav.clicked .headerItem:hover > .underBar {
+  background-color: grey;
 }

@@ -2,23 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/android/android-launchericon-512-512.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jamondan</title>
-    <link rel="manifest" href="/manifest.webmanifest">
-
-    <!-- Vite HMR Client -->
-    <script type="module" src="/@vite/client"></script>
-    <!-- React Refresh Runtime -->
-    <script type="module">
-      import RefreshRuntime from "/@react-refresh";
-      RefreshRuntime.injectIntoGlobalHook(window);
-      window.$RefreshReg$ = () => {};
-      window.$RefreshSig$ = () => (type) => type;
-      window.__vite_plugin_react_preamble_installed__ = true;
-    </script>
-    <!-- Main React Script -->
     <script type="module" crossorigin src="/src/main.jsx"></script>
+    <link rel="/manifest" href="/manifest.webmanifest">
+    <script src="/registerSW.js"></script>
   </head>
   <body>
     <div id="root"></div>

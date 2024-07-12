@@ -1,7 +1,7 @@
 // 랭킹 페이지를 렌더링하는 컴포넌트
 
 import "./css/ranking.css";
-import RankingHeader from "./RankingHedaer";
+import RankingHeader from "./RankingHeader";
 import RankingInner from "./RankingInner";
 import { useState, createContext } from "react";
 

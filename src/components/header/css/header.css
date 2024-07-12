@@ -1,4 +1,6 @@
 .header {
+  position: relative;
+
   width: 100%;
   height: 6.2rem;
   background-color: #00000050;
@@ -14,11 +16,33 @@
 
 .nav {
   display: flex;
-  flex-direction: row;
-  gap: 4rem;
   font-size: 2rem;
+}
 
+.nav.unclicked {
+  flex-direction: row;
   min-width: 45.5rem;
+  gap: 4rem;
+}
+
+.nav.clicked {
+  width: 100%;
+
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-bottom: 0.2rem;
+
+  background-color: #353a47;
+
+  top: 100%;
+  left: 0;
+  z-index: 2;
+
+  animation-name: clickedMenu;
+  animation-duration: 0.6s;
 }
 
 .logo {
@@ -61,7 +85,21 @@
   }
 }
 
-@media (max-width: 918px) {
+@keyframes clickedMenu {
+  0% {
+    transform: translateX(-30%);
+    opacity: 0.9;
+  }
+  100% {
+    opacity: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 834px) {
+  .header {
+    padding: 0 10vw;
+  }
   .nav {
     display: none;
   }
