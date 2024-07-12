@@ -17,32 +17,5 @@
   ],
   "categories": [
     "government"
-  ],
-  "app_id": "com.yongsanspo.jamondan",
-  "launch_handler": {
-    "client_mode": "navigate-existing"
-  },
-  "orientation": "portrait",
-  "screenshots": [
-    {
-      "src": "screenshots/screenshot1.png",
-      "sizes": "540x720",
-      "type": "image/png"
-    },
-    {
-      "src": "screenshots/screenshot2.png",
-      "sizes": "540x720",
-      "type": "image/png"
-    }
-  ],
-  "dir": "ltr",
-  "iarc_rating_id": "e1abc2345",
-  "prefer_related_applications": false,
-  "related_applications": [],
-  "scope_extensions": [
-    {
-      "origin": "https://example.com",
-      "path": "/scope-extension"
-    }
   ]
 }
