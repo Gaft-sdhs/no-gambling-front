@@ -1,5 +1,3 @@
-// Snail 레이스 페이지 컴포넌트
-
 import React, { useState, useEffect } from "react";
 import SnailRace from "../components/snail/SnailRace";
 import Ranking from "../components/ranking/Ranking";
@@ -30,6 +28,7 @@ const Snail = () => {
   });
   const [currentBet, setCurrentBet] = useState('+');
   const [betData, setBetData] = useState(null);
+  const [hasBet, setHasBet] = useState(false); // 추가된 상태
 
   useEffect(() => {
     const storedMoney = parseInt(localStorage.getItem('userAssets'));
@@ -54,6 +53,7 @@ const Snail = () => {
     setSpeeds(newSpeeds);
     setIsRacing(true);
     setPositions([14, 14, 14]);
+    setHasBet(false); // 레이스 시작 시 배팅 상태 초기화
 
     const id = setInterval(() => {
       let updatedSpeeds;
@@ -92,7 +92,7 @@ const Snail = () => {
   };
 
   const handleVote = (index) => {
-    if (!isRacing) {
+    if (!isRacing && !hasBet) { // 이미 배팅한 경우 배팅 불가
       setSelectedVote(index);
       setSelectedSnail(index);
       setShowBetModal(true);
@@ -105,6 +105,7 @@ const Snail = () => {
     setUser((prevUser) => ({ ...prevUser, money: newMoney }));
     localStorage.setItem('userAssets', newMoney);
     setShowBetModal(false);
+    setHasBet(true); // 배팅 완료 후 상태 업데이트
   };
 
   const handleBetResult = (winner) => {
@@ -126,6 +127,7 @@ const Snail = () => {
             {snails.map((snail, index) => (
                 <SnailRace
                     key={snail}
+                    className={`s${index + 1}`}
                     snailIndex={index}
                     snailPng={snailImages[index]}
                     position={positions[index]}

@@ -1,12 +1,8 @@
-// 달팽이 배팅 모달 컴포넌트
-
 import React, { useState } from 'react';
 
-// SnailBetModal 컴포넌트: 사용자가 달팽이 게임에 배팅할 수 있도록 함
 const SnailBetModal = ({ user, currentBet, placeBet, setShowBetModal, snailIndex }) => {
   const [betAmount, setBetAmount] = useState('');
 
-  // handleBet 함수: 배팅 금액을 검증하고 배팅을 처리
   const handleBet = () => {
     const parsedBetAmount = parseInt(betAmount);
 
@@ -27,31 +23,26 @@ const SnailBetModal = ({ user, currentBet, placeBet, setShowBetModal, snailIndex
     setShowBetModal(false);
   };
 
-  // 배팅 설명을 결정하는 객체
-  const explanation = {
-    '+': '1 달팽이에게 예측합니다.',
-    '-': '2 달팽이에게 예측합니다.',
-    '=': '3 달팽이에게 예측합니다.',
-  }[currentBet];
+  const explanation = `${snailIndex + 1} 달팽이에게 예측합니다.`;
 
   return (
-      <div className="modal" style={{ display: 'flex' }}>
-        <div className="modal-content">
-          <span className="close" onClick={() => setShowBetModal(false)}>&times;</span>
-          <h2>배팅하기</h2>
-          <p>사용자: <span id="userName">{user.name}</span></p>
-          <p>자산: $<span id="userAssets">{user.money}</span></p>
-          <p id="betExplanation">{explanation}</p>
-          <input
-              type="number"
-              id="betAmount"
-              value={betAmount}
-              onChange={(e) => setBetAmount(e.target.value)}
-              placeholder="금액입력 (최소 20,000원)"
-          />
-          <button className="bet-button" onClick={handleBet}>배팅</button>
-        </div>
+    <div className="modal" style={{ display: 'flex' }}>
+      <div className="modal-content">
+        <span className="close" onClick={() => setShowBetModal(false)}>&times;</span>
+        <h2>배팅하기</h2>
+        <p>사용자: <span id="userName">{user.name}</span></p>
+        <p>자산: $<span id="userAssets">{user.money}</span></p>
+        <p id="betExplanation">{explanation}</p>
+        <input
+          type="number"
+          id="betAmount"
+          value={betAmount}
+          onChange={(e) => setBetAmount(e.target.value)}
+          placeholder="금액입력 (최소 20,000원)"
+        />
+        <button className="bet-button" onClick={handleBet}>배팅</button>
       </div>
+    </div>
   );
 };
 

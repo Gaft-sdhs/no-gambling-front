@@ -8,7 +8,6 @@
   flex-direction: column;
   align-items: center;
   float: left; /* 전체를 왼쪽으로 배치 */
-  margin-left: 20px;
 }
 
 .con {
