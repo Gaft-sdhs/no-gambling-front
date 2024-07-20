@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
+import babel from '@rollup/plugin-babel';
 
 export default defineConfig({
   plugins: [
@@ -26,6 +27,13 @@ export default defineConfig({
           }
         ]
       }
+    }),
+    babel({
+      babelHelpers: 'bundled',
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      include: ['src/**/*'],
+      presets: ['@babel/preset-env', '@babel/preset-react'],
+      plugins: ['transform-remove-console']
     })
   ],
   server: {
