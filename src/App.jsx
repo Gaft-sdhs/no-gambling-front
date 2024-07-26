@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import Header from "./components/header/Header";
 import Index from "./pages/Index";
 import Snail from "./pages/Snail";
 import Ladder from "./pages/Ladder";
@@ -48,17 +47,16 @@ function App() {
   }, [lostCount]);
 
   return (
-      <>
-        {showModal && <LossWarning onClose={handleCloseModal} />}
-        <Header />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/snail" element={<Snail />} />
-          <Route path="/ladder" element={<Ladder />} />
-          <Route path="/powerball" element={<PowerBall />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </>
+    <>
+      {showModal && <LossWarning onClose={handleCloseModal} />}
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/snail" element={<Snail />} />
+        <Route path="/ladder" element={<Ladder />} />
+        <Route path="/powerball" element={<PowerBall />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </>
   );
 }
 

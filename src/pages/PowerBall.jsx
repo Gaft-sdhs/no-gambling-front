@@ -8,6 +8,7 @@ import Timer from "../components/powerball/Timer";
 import GamblingArea from "../components/powerball/GamblingArea";
 import TutorialModal from "../components/powerball/TutorialModal";
 import Ranking from "../components/ranking/Ranking";
+import Header from "../components/header/Header";
 import useGameState from "../hooks/useGameState";
 import "./css/powerball.css";
 import imageSrc from "../assets/random.png";
@@ -39,42 +40,45 @@ const PowerBall = () => {
   const res = values.slice(1).reduce((acc, val) => acc + val, 0);
 
   return (
+    <>
+      <Header />
       <main className="powerball">
         <section className="container">
           <Timer time={time} />
           <GamblingArea
-              target={targetValue}
-              values={values}
-              showResults={showResults}
-              imageSrc={imageSrc}
+            target={targetValue}
+            values={values}
+            showResults={showResults}
+            imageSrc={imageSrc}
           />
           <Bars bars={bars} />
           <BettingArea
-              hasBet={hasBet}
-              updateCurrentBet={updateCurrentBet}
-              setShowBetModal={setShowBetModal}
-              showResults={showResults}
-              res={res}
+            hasBet={hasBet}
+            updateCurrentBet={updateCurrentBet}
+            setShowBetModal={setShowBetModal}
+            showResults={showResults}
+            res={res}
           />
           {showBetModal && (
-              <PowerballBetModal
-                  user={user}
-                  currentBet={currentBet}
-                  placeBet={placeBet}
-                  setShowBetModal={setShowBetModal}
-              />
+            <PowerballBetModal
+              user={user}
+              currentBet={currentBet}
+              placeBet={placeBet}
+              setShowBetModal={setShowBetModal}
+            />
           )}
           {showTutorialModal && (
-              <TutorialModal
-                  currentSlide={currentSlide}
-                  setCurrentSlide={setCurrentSlide}
-                  setShowTutorialModal={setShowTutorialModal}
-                  completeTutorial={completeTutorial}
-              />
+            <TutorialModal
+              currentSlide={currentSlide}
+              setCurrentSlide={setCurrentSlide}
+              setShowTutorialModal={setShowTutorialModal}
+              completeTutorial={completeTutorial}
+            />
           )}
         </section>
         <Ranking />
       </main>
+    </>
   );
 };
 

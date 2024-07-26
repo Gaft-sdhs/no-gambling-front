@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import SnailRace from "../components/snail/SnailRace";
 import Ranking from "../components/ranking/Ranking";
 import TutorialModal from "../components/snail/TutorialModal";
-import SnailBetModal from '../components/snail/SnailBetModal.jsx';
+import SnailBetModal from "../components/snail/SnailBetModal.jsx";
+import Header from "../components/header/Header";
 import snailImage1 from "../assets/1snail.png";
 import snailImage2 from "../assets/2snail.png";
 import snailImage3 from "../assets/3snail.png";
@@ -23,15 +24,15 @@ const Snail = () => {
   const [selectedVote, setSelectedVote] = useState(null);
   const [raceCount, setRaceCount] = useState(0); // 추가된 상태
   const [user, setUser] = useState({
-    name: '사용자 이름',
-    money: parseInt(localStorage.getItem('userAssets')) || 100,
+    name: "사용자 이름",
+    money: parseInt(localStorage.getItem("userAssets")) || 100,
   });
-  const [currentBet, setCurrentBet] = useState('+');
+  const [currentBet, setCurrentBet] = useState("+");
   const [betData, setBetData] = useState(null);
   const [hasBet, setHasBet] = useState(false); // 추가된 상태
 
   useEffect(() => {
-    const storedMoney = parseInt(localStorage.getItem('userAssets'));
+    const storedMoney = parseInt(localStorage.getItem("userAssets"));
     if (storedMoney) {
       setUser((prevUser) => ({ ...prevUser, money: storedMoney }));
     }
@@ -40,12 +41,12 @@ const Snail = () => {
   const getRandomSpeed = () => Math.random() * 4 + 4;
 
   const startRace = () => {
-    setRaceCount(prevCount => prevCount + 1); // 레이스 카운트 증가
+    setRaceCount((prevCount) => prevCount + 1); // 레이스 카운트 증가
     let newSpeeds;
     if (raceCount >= 2 && selectedSnail !== null) {
       // 세 번째 레이스부터는 사용자가 선택한 달팽이의 속도를 1로 설정
       newSpeeds = snails.map((_, index) =>
-          index === selectedSnail ? 10 : getRandomSpeed()
+        index === selectedSnail ? 10 : getRandomSpeed()
       );
     } else {
       newSpeeds = snails.map(() => getRandomSpeed());
@@ -59,7 +60,7 @@ const Snail = () => {
       let updatedSpeeds;
       if (raceCount >= 2 && selectedSnail !== null) {
         updatedSpeeds = snails.map((_, index) =>
-            index === selectedSnail ? 1 : getRandomSpeed()
+          index === selectedSnail ? 1 : getRandomSpeed()
         );
       } else {
         updatedSpeeds = snails.map(() => getRandomSpeed());
@@ -92,7 +93,8 @@ const Snail = () => {
   };
 
   const handleVote = (index) => {
-    if (!isRacing && !hasBet) { // 이미 배팅한 경우 배팅 불가
+    if (!isRacing && !hasBet) {
+      // 이미 배팅한 경우 배팅 불가
       setSelectedVote(index);
       setSelectedSnail(index);
       setShowBetModal(true);
@@ -103,7 +105,7 @@ const Snail = () => {
     setBetData({ snailIndex: selectedSnail, amount });
     const newMoney = user.money - amount;
     setUser((prevUser) => ({ ...prevUser, money: newMoney }));
-    localStorage.setItem('userAssets', newMoney);
+    localStorage.setItem("userAssets", newMoney);
     setShowBetModal(false);
     setHasBet(true); // 배팅 완료 후 상태 업데이트
   };
@@ -113,47 +115,86 @@ const Snail = () => {
       if (betData.snailIndex === parseInt(winner) - 1) {
         const newMoney = user.money + betData.amount * 2;
         setUser((prevUser) => ({ ...prevUser, money: newMoney }));
-        localStorage.setItem('userAssets', newMoney);
+        localStorage.setItem("userAssets", newMoney);
       }
       setBetData(null);
     }
   };
 
   return (
+    <>
+      <Header />
       <main className="Snail">
         <TutorialModal />
         <section className="container">
-          <div className="race-track" style={{ backgroundImage: `url("${snailBg}")` }}>
+          <div
+            className="race-track"
+            style={{ backgroundImage: `url("${snailBg}")` }}
+          >
             {snails.map((snail, index) => (
-                <SnailRace
-                    key={snail}
-                    className={`s${index + 1}`}
-                    snailIndex={index}
-                    snailPng={snailImages[index]}
-                    position={positions[index]}
-                    speed={speeds[index]}
-                    top={index * 15 + 45}
-                />
+              <SnailRace
+                key={snail}
+                className={`s${index + 1}`}
+                snailIndex={index}
+                snailPng={snailImages[index]}
+                position={positions[index]}
+                speed={speeds[index]}
+                top={index * 15 + 45}
+              />
             ))}
             <div className="button-container">
-              <button className={selectedVote === 0 ? "vote-button selected-red" : "vote-button"} onClick={() => handleVote(0)}>1번 달팽이</button>
-              <button className={selectedVote === 1 ? "vote-button selected-green" : "vote-button"} onClick={() => handleVote(1)}>2번 달팽이</button>
-              <button className={selectedVote === 2 ? "vote-button selected-blue" : "vote-button"} onClick={() => handleVote(2)}>3번 달팽이</button>
-              <button className="start-button" onClick={startRace} disabled={isRacing}>Start Race</button>
+              <button
+                className={
+                  selectedVote === 0
+                    ? "vote-button selected-red"
+                    : "vote-button"
+                }
+                onClick={() => handleVote(0)}
+              >
+                1번 달팽이
+              </button>
+              <button
+                className={
+                  selectedVote === 1
+                    ? "vote-button selected-green"
+                    : "vote-button"
+                }
+                onClick={() => handleVote(1)}
+              >
+                2번 달팽이
+              </button>
+              <button
+                className={
+                  selectedVote === 2
+                    ? "vote-button selected-blue"
+                    : "vote-button"
+                }
+                onClick={() => handleVote(2)}
+              >
+                3번 달팽이
+              </button>
+              <button
+                className="start-button"
+                onClick={startRace}
+                disabled={isRacing}
+              >
+                Start Race
+              </button>
             </div>
           </div>
           <Ranking />
         </section>
         {showBetModal && (
-            <SnailBetModal
-                user={user}
-                currentBet={currentBet}
-                placeBet={placeBet}
-                setShowBetModal={setShowBetModal}
-                snailIndex={selectedSnail}
-            />
+          <SnailBetModal
+            user={user}
+            currentBet={currentBet}
+            placeBet={placeBet}
+            setShowBetModal={setShowBetModal}
+            snailIndex={selectedSnail}
+          />
         )}
       </main>
+    </>
   );
 };
 
