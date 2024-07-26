@@ -22,7 +22,7 @@ const Snail = () => {
   const [speeds, setSpeeds] = useState([0, 0, 0]);
   const [intervalId, setIntervalId] = useState(null);
   const [selectedVote, setSelectedVote] = useState(null);
-  const [raceCount, setRaceCount] = useState(0); // 추가된 상태
+  const [raceCount, setRaceCount] = useState(0); 
   const [user, setUser] = useState({
     name: "사용자 이름",
     money: parseInt(localStorage.getItem("userAssets")) || 100,
