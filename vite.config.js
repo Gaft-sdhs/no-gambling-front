@@ -14,6 +14,10 @@ export default defineConfig({
         short_name: 'jamondan',
         description: '용산 경찰서 자문단',
         theme_color: '#ffffff',
+        background_color: '#ffffff',
+        display: 'standalone',
+        start_url: '/',
+        scope: '/',
         icons: [
           {
             src: 'pwa-512x512.png',
@@ -24,6 +28,33 @@ export default defineConfig({
             src: 'pwa-1024x1024.png',
             sizes: '1024x1024',
             type: 'image/png'
+          }
+        ]
+      },
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/example\.com\/.*\/*.json/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'json-cache',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 7, 
+              },
+              networkTimeoutSeconds: 10
+            }
+          },
+          {
+            urlPattern: /^https:\/\/example\.com\/images\/.*\.(?:png|jpg|jpeg|svg|gif)/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'image-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 * 30, 
+              }
+            }
           }
         ]
       }
