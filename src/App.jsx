@@ -4,13 +4,12 @@ import Index from "./pages/Index";
 import Snail from "./pages/Snail";
 import Ladder from "./pages/Ladder";
 import PowerBall from "./pages/PowerBall";
-import LossWarning from "./components/LossWarning/LossWarning";
-import InstallPWA from "./components/PWA/InstallPWA.jsx";
+import LossWarning from "./components/LossWarning/LossWarning"; // LossWarning 컴포넌트 추가
 import "./css/index.css";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const [lostCount, setLostCount] = useState(0);
+  const [lostCount, setLostCount] = useState(0); // 잃은 횟수 카운트
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -28,10 +27,11 @@ function App() {
     };
   }, []);
 
+  // 로컬 스토리지에서 사용자 재산 데이터를 가져오기
   useEffect(() => {
     const storedMoney = parseInt(localStorage.getItem("userAssets"));
     if (storedMoney < 0) {
-      setLostCount((prevCount) => prevCount + 1);
+      setLostCount((prevCount) => prevCount + 1); // 잃은 횟수 카운트 증가
     }
   }, []);
 
@@ -39,6 +39,7 @@ function App() {
     setShowModal(false);
   };
 
+  // 3번 잃을 때마다 모달을 띄우기
   useEffect(() => {
     if (lostCount > 0 && lostCount % 3 === 0) {
       setShowModal(true);
@@ -48,7 +49,6 @@ function App() {
   return (
     <>
       {showModal && <LossWarning onClose={handleCloseModal} />}
-      <InstallPWA />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/snail" element={<Snail />} />
