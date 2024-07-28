@@ -22,7 +22,7 @@ const Snail = () => {
   const [speeds, setSpeeds] = useState([0, 0, 0]);
   const [intervalId, setIntervalId] = useState(null);
   const [selectedVote, setSelectedVote] = useState(null);
-  const [raceCount, setRaceCount] = useState(0); 
+  const [raceCount, setRaceCount] = useState(0);
   const [user, setUser] = useState({
     name: "사용자 이름",
     money: parseInt(localStorage.getItem("userAssets")) || 100,
@@ -84,7 +84,7 @@ const Snail = () => {
         resetRace();
       }, 8000);
     }
-  }, [positions]);
+  }, [handleBetResult, intervalId, positions, snails, speeds]);
 
   const resetRace = () => {
     setPositions([14, 14, 14]);
