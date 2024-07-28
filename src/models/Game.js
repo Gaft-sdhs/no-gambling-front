@@ -11,8 +11,8 @@ class Game {
     this.currentBet = null;
     this.betAmount = 0;
     this.hasBet = false;
-    this.gameTimer = 60; // 게임 타이머 설정
-    this.resultTimer = 30; // 결과 타이머 설정
+    this.gameTimer = 30; // 게임 타이머 설정
+    this.resultTimer = 10; // 결과 타이머 설정
     this.targetValue = Math.floor(Math.random() * 30) + 1; // 목표 값 설정
     this.values = this.generateRandomValues(); // 랜덤 값 생성
     this.bars = [33, 33, 34]; // 바 초기 설정
@@ -32,7 +32,7 @@ class Game {
 
   // 게임 시작 메서드
   startGame() {
-    this.gameTimer = 60;
+    this.gameTimer = 30;
     this.hasBet = false;
     this.targetValue = Math.floor(Math.random() * 30) + 1;
     this.values = this.generateRandomValues();
@@ -123,7 +123,7 @@ class Game {
 
   // 결과 타이머 시작 메서드
   startResultTimer() {
-    this.resultTimer = 30;
+    this.resultTimer = 10;
   }
 
   // 베팅 처리 메서드
