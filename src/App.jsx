@@ -11,21 +11,23 @@ export const LostCountContext = createContext();
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const lostCount = useRef(0); // 잃은 횟수 카운트
+  const [lostCount, setLostCount] = useState(3);
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
-  // 2번 잃을 때마다 모달을 띄우기
+  // 3번 플레이 할 때마다 모달을 띄우기
   useEffect(() => {
-    if (lostCount != 0 && lostCount % 2 === 0) {
+    if (lostCount != 0 && lostCount % 3 === 0) {
       setShowModal(true);
+    } else {
+      setShowModal(false);
     }
   }, [lostCount]);
 
   const changeLostCountHandler = () => {
-    lostCount.current++;
+    setLostCount(lostCount % 3 === 0 ? 4 : lostCount + 1);
   };
 
   return (

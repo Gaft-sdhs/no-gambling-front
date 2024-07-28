@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import SnailRace from "../components/snail/SnailRace";
 import Ranking from "../components/ranking/Ranking";
 import TutorialModal from "../components/snail/TutorialModal";
-import SnailBetModal from "../components/snail/SnailBetModal.jsx";
+import SnailBetModal from "../components/snail/SnailBetModal";
 import Header from "../components/header/Header";
 import snailImage1 from "../assets/1snail.png";
 import snailImage2 from "../assets/2snail.png";
@@ -10,6 +10,8 @@ import snailImage3 from "../assets/3snail.png";
 import snailBg from "../assets/snail_bg.png";
 
 import "./css/snail.css";
+
+import { LostCountContext } from "../App";
 
 const snailImages = [snailImage1, snailImage2, snailImage3];
 
@@ -30,6 +32,8 @@ const Snail = () => {
   const [currentBet, setCurrentBet] = useState("+");
   const [betData, setBetData] = useState(null);
   const [hasBet, setHasBet] = useState(false); // 추가된 상태
+
+  const changeLostCountHandler = useContext(LostCountContext);
 
   useEffect(() => {
     const storedMoney = parseInt(localStorage.getItem("userAssets"));
@@ -82,9 +86,18 @@ const Snail = () => {
         alert(`${winner} 달팽이가 이겼습니다!`);
         handleBetResult(winner);
         resetRace();
+        console.log(changeLostCountHandler);
+        changeLostCountHandler();
       }, 8000);
     }
-  }, [handleBetResult, intervalId, positions, snails, speeds]);
+  }, [
+    handleBetResult,
+    changeLostCountHandler,
+    intervalId,
+    positions,
+    snails,
+    speeds,
+  ]);
 
   const resetRace = () => {
     setPositions([14, 14, 14]);
