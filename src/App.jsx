@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useRef } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import Snail from "./pages/Snail";
@@ -7,55 +7,41 @@ import PowerBall from "./pages/PowerBall";
 import LossWarning from "./components/LossWarning/LossWarning"; // LossWarning 컴포넌트 추가
 import "./css/index.css";
 
+export const LostCountContext = createContext();
+
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const [lostCount, setLostCount] = useState(0); // 잃은 횟수 카운트
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      if (window.innerWidth < 30000) {
-        setShowModal(true);
-      } else {
-        setShowModal(false);
-      }
-    };
-
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => {
-      window.removeEventListener("resize", checkScreenSize);
-    };
-  }, []);
-
-  // 로컬 스토리지에서 사용자 재산 데이터를 가져오기
-  useEffect(() => {
-    const storedMoney = parseInt(localStorage.getItem("userAssets"));
-    if (storedMoney < 0) {
-      setLostCount((prevCount) => prevCount + 1); // 잃은 횟수 카운트 증가
-    }
-  }, []);
+  const [lostCount, setLostCount] = useState(3);
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
-  // 3번 잃을 때마다 모달을 띄우기
+  // 3번 플레이 할 때마다 모달을 띄우기
   useEffect(() => {
-    if (lostCount > 0 && lostCount % 3 === 0) {
+    if (lostCount != 0 && lostCount % 3 === 0) {
       setShowModal(true);
+    } else {
+      setShowModal(false);
     }
   }, [lostCount]);
+
+  const changeLostCountHandler = () => {
+    setLostCount(lostCount % 3 === 0 ? 4 : lostCount + 1);
+  };
 
   return (
     <>
       {showModal && <LossWarning onClose={handleCloseModal} />}
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/snail" element={<Snail />} />
-        <Route path="/ladder" element={<Ladder />} />
-        <Route path="/powerball" element={<PowerBall />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      <LostCountContext.Provider value={changeLostCountHandler}>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/snail" element={<Snail />} />
+          <Route path="/ladder" element={<Ladder />} />
+          <Route path="/powerball" element={<PowerBall />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </LostCountContext.Provider>
     </>
   );
 }

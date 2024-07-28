@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import SnailRace from "../components/snail/SnailRace";
 import Ranking from "../components/ranking/Ranking";
 import TutorialModal from "../components/snail/TutorialModal";
-import SnailBetModal from "../components/snail/SnailBetModal.jsx";
+import SnailBetModal from "../components/snail/SnailBetModal";
 import Header from "../components/header/Header";
 import snailImage1 from "../assets/1snail.png";
 import snailImage2 from "../assets/2snail.png";
@@ -10,6 +10,8 @@ import snailImage3 from "../assets/3snail.png";
 import snailBg from "../assets/snail_bg.png";
 
 import "./css/snail.css";
+
+import { LostCountContext } from "../App";
 
 const snailImages = [snailImage1, snailImage2, snailImage3];
 
@@ -22,7 +24,7 @@ const Snail = () => {
   const [speeds, setSpeeds] = useState([0, 0, 0]);
   const [intervalId, setIntervalId] = useState(null);
   const [selectedVote, setSelectedVote] = useState(null);
-  const [raceCount, setRaceCount] = useState(0); 
+  const [raceCount, setRaceCount] = useState(0);
   const [user, setUser] = useState({
     name: "사용자 이름",
     money: parseInt(localStorage.getItem("userAssets")) || 100,
@@ -30,6 +32,8 @@ const Snail = () => {
   const [currentBet, setCurrentBet] = useState("+");
   const [betData, setBetData] = useState(null);
   const [hasBet, setHasBet] = useState(false); // 추가된 상태
+
+  const changeLostCountHandler = useContext(LostCountContext);
 
   useEffect(() => {
     const storedMoney = parseInt(localStorage.getItem("userAssets"));
@@ -82,9 +86,18 @@ const Snail = () => {
         alert(`${winner} 달팽이가 이겼습니다!`);
         handleBetResult(winner);
         resetRace();
+        console.log(changeLostCountHandler);
+        changeLostCountHandler();
       }, 8000);
     }
-  }, [positions]);
+  }, [
+    handleBetResult,
+    changeLostCountHandler,
+    intervalId,
+    positions,
+    snails,
+    speeds,
+  ]);
 
   const resetRace = () => {
     setPositions([14, 14, 14]);
@@ -110,16 +123,19 @@ const Snail = () => {
     setHasBet(true); // 배팅 완료 후 상태 업데이트
   };
 
-  const handleBetResult = (winner) => {
-    if (betData) {
-      if (betData.snailIndex === parseInt(winner) - 1) {
-        const newMoney = user.money + betData.amount * 2;
-        setUser((prevUser) => ({ ...prevUser, money: newMoney }));
-        localStorage.setItem("userAssets", newMoney);
+  const handleBetResult = useCallback(
+    (winner) => {
+      if (betData) {
+        if (betData.snailIndex === parseInt(winner) - 1) {
+          const newMoney = user.money + betData.amount * 2;
+          setUser((prevUser) => ({ ...prevUser, money: newMoney }));
+          localStorage.setItem("userAssets", newMoney);
+        }
+        setBetData(null);
       }
-      setBetData(null);
-    }
-  };
+    },
+    [betData, user.money]
+  );
 
   return (
     <>
