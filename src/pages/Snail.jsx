@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import SnailRace from "../components/snail/SnailRace";
 import Ranking from "../components/ranking/Ranking";
 import TutorialModal from "../components/snail/TutorialModal";
@@ -110,16 +110,19 @@ const Snail = () => {
     setHasBet(true); // 배팅 완료 후 상태 업데이트
   };
 
-  const handleBetResult = (winner) => {
-    if (betData) {
-      if (betData.snailIndex === parseInt(winner) - 1) {
-        const newMoney = user.money + betData.amount * 2;
-        setUser((prevUser) => ({ ...prevUser, money: newMoney }));
-        localStorage.setItem("userAssets", newMoney);
+  const handleBetResult = useCallback(
+    (winner) => {
+      if (betData) {
+        if (betData.snailIndex === parseInt(winner) - 1) {
+          const newMoney = user.money + betData.amount * 2;
+          setUser((prevUser) => ({ ...prevUser, money: newMoney }));
+          localStorage.setItem("userAssets", newMoney);
+        }
+        setBetData(null);
       }
-      setBetData(null);
-    }
-  };
+    },
+    [betData, user.money]
+  );
 
   return (
     <>
