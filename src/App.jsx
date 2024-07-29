@@ -11,7 +11,7 @@ export const LostCountContext = createContext();
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const [lostCount, setLostCount] = useState(3);
+  const [lostCount, setLostCount] = useState(0);
 
   const handleCloseModal = () => {
     setShowModal(false);
