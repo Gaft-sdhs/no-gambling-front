@@ -37,7 +37,7 @@ const Snail = ({ raceCount, setRaceCount }) => {
     }
   }, []);
 
-  const getRandomSpeed = () => Math.random() * 4 + 4;
+  const getRandomSpeed = () => Math.random() * 2 + 2;
 
   const startRace = () => {
     setRaceCount(raceCount + 1); // 레이스 카운트 증가
@@ -86,7 +86,7 @@ const Snail = ({ raceCount, setRaceCount }) => {
         handleBetResult(winner);
         resetRace();
         changeLostCountHandler();
-      }, 8000);
+      }, 4500);
     }
   }, [handleBetResult, changeLostCountHandler, positions, snails, speeds]);
 
