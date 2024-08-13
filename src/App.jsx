@@ -19,7 +19,7 @@ function App() {
 
   // 3번 플레이 할 때마다 모달을 띄우기
   useEffect(() => {
-    if (lostCount != 0 && lostCount % 3 === 0) {
+    if (lostCount != 0 && lostCount % 10 === 0) {
       setShowModal(true);
     } else {
       setShowModal(false);
@@ -27,7 +27,7 @@ function App() {
   }, [lostCount]);
 
   const changeLostCountHandler = () => {
-    setLostCount(lostCount % 3 === 0 ? 4 : lostCount + 1);
+    setLostCount(lostCount % 10 === 0 ? 11 : lostCount + 1);
   };
 
   return (
