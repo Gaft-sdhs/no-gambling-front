@@ -1,43 +1,52 @@
 .rankingInnerItem {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
 
-    display: flex;
-    justify-content: flex-start;
-    /* gap: 1rem; */
-    
-    background-color: rgba(255, 255, 255, 0.3);
-    margin: 0.6rem 1rem;
+  display: flex;
+  justify-content: flex-start;
+  /* gap: 1rem; */
 
-    border-radius: 15px;
-    align-items: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 0.6rem 1rem;
+
+  border-radius: 15px;
+  align-items: center;
 }
 
 .rankingInnerItem > .rank {
-    width: 4.5rem;
-    height: 4.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    border-radius: 15px;
+  border-radius: 15px;
 
-    background-color: #FFFFFF20;
+  background-color: #ffffff20;
 }
 .rankingInnerItem .name {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 .rankingInnerItem .money {
-    padding-right: 10px;
-    margin-left: auto;
+  padding-right: 10px;
+  margin-left: auto;
 }
 
 .rankingInnerItem.MY {
-    background-color: #8DACFF20;
+  background-color: #8dacff20;
 }
 
 .rankingInnerItem.MY > .rank {
-    background-color: #8dabff20;
+  background-color: #8dabff20;
+}
+@media (max-width: 600px) {
+  .rankingInnerItem {
+    font-size: 1.3rem;
+  }
+  .rankingInnerItem > .rank {
+    width: 4rem;
+    height: 4rem;
+  }
 }

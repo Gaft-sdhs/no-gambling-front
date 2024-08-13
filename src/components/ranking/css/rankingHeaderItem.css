@@ -1,25 +1,32 @@
 .rankingHeaderItem {
-    cursor: pointer;
+  cursor: pointer;
 
-    color: white;
-    font-weight: bolder;
+  color: white;
+  font-weight: bolder;
 
-    transition: all 0.5s;
-    padding: 9.6px 30.4px;
+  transition: all 0.5s;
+  padding: 9.6px 30.4px;
 
-    font-size: 24px;
-    border: 0.4rem solid white;
+  font-size: 24px;
+  border: 0.4rem solid white;
 
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 .rankingHeaderItem:hover {
-    color: #a3b1ff;
+  color: #a3b1ff;
 
-    background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
 }
+
 .rankingHeaderItem.on {
-    color: #CBD3FF;
-    background-color: rgba(255, 255, 255, 0.1);
+  color: #cbd3ff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+@media (max-width: 600px) {
+  .rankingHeaderItem {
+    font-size: 20px;
+    padding: 9px 28px;
+  }
 }
