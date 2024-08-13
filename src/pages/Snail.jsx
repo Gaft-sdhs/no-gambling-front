@@ -29,7 +29,6 @@ const Snail = () => {
     name: "사용자 이름",
     money: parseInt(localStorage.getItem("userAssets")) || 100,
   });
-  const [currentBet, setCurrentBet] = useState("+");
   const [betData, setBetData] = useState(null);
   const [hasBet, setHasBet] = useState(false); // 추가된 상태
 
@@ -202,7 +201,6 @@ const Snail = () => {
         {showBetModal && (
           <SnailBetModal
             user={user}
-            currentBet={currentBet}
             placeBet={placeBet}
             setShowBetModal={setShowBetModal}
             snailIndex={selectedSnail}
