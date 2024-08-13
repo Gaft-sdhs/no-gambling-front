@@ -39,7 +39,7 @@
 
   top: 100%;
   left: 0;
-  z-index: 2;
+  z-index: 999999999;
 
   animation-name: clickedMenu;
   animation-duration: 0.6s;
