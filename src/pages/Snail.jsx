@@ -25,19 +25,16 @@ const Snail = () => {
   const [intervalId, setIntervalId] = useState(null);
   const [selectedVote, setSelectedVote] = useState(null);
   const [raceCount, setRaceCount] = useState(0);
-  const [user, setUser] = useState({
-    name: "사용자 이름",
-    money: 0,
-  });
+  const [userMoney, setUserMoney] = useState(0);
   const [betData, setBetData] = useState(null);
   const [hasBet, setHasBet] = useState(false); // 추가된 상태
 
   const changeLostCountHandler = useContext(LostCountContext);
 
   useEffect(() => {
-    const storedMoney = parseInt(localStorage.getItem("₩Assets"));
+    const storedMoney = parseInt(localStorage.getItem("userAssets"));
     if (storedMoney) {
-      setUser((prevUser) => ({ ...prevUser, money: storedMoney }));
+      setUserMoney(storedMoney);
     }
   }, []);
 
@@ -114,9 +111,11 @@ const Snail = () => {
 
   const placeBet = (amount) => {
     setBetData({ snailIndex: selectedSnail, amount });
-    const newMoney = user.money - amount;
-    setUser((prevUser) => ({ ...prevUser, money: newMoney }));
+    const newMoney = userMoney - amount;
+    setUserMoney(newMoney);
+
     localStorage.setItem("userAssets", newMoney);
+
     setShowBetModal(false);
     setHasBet(true); // 배팅 완료 후 상태 업데이트
   };
@@ -125,14 +124,14 @@ const Snail = () => {
     (winner) => {
       if (betData) {
         if (betData.snailIndex === parseInt(winner) - 1) {
-          const newMoney = user.money + betData.amount * 2;
-          setUser((prevUser) => ({ ...prevUser, money: newMoney }));
+          const newMoney = userMoney + betData.amount * 2;
+          setUserMoney(newMoney);
           localStorage.setItem("userAssets", newMoney);
         }
         setBetData(null);
       }
     },
-    [betData, user.money]
+    [betData, userMoney]
   );
 
   return (
@@ -200,7 +199,7 @@ const Snail = () => {
         </section>
         {showBetModal && (
           <SnailBetModal
-            user={user}
+            userMoney={userMoney}
             placeBet={placeBet}
             setShowBetModal={setShowBetModal}
             snailIndex={selectedSnail}

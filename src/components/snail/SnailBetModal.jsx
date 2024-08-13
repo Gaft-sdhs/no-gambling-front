@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-const SnailBetModal = ({ user, placeBet, setShowBetModal, snailIndex }) => {
+const SnailBetModal = ({
+  userMoney,
+  placeBet,
+  setShowBetModal,
+  snailIndex,
+}) => {
   const [betAmount, setBetAmount] = useState("");
 
   const handleBet = () => {
@@ -14,7 +19,7 @@ const SnailBetModal = ({ user, placeBet, setShowBetModal, snailIndex }) => {
       alert("최소 베팅 금액은 20,000원입니다.");
       return;
     }
-    if (parsedBetAmount > user.money) {
+    if (parsedBetAmount > userMoney) {
       alert("자산보다 많은 금액을 배팅할 수 없습니다.");
       return;
     }
@@ -33,10 +38,10 @@ const SnailBetModal = ({ user, placeBet, setShowBetModal, snailIndex }) => {
         </span>
         <h2>배팅하기</h2>
         <p>
-          사용자: <span id="userName">{user.name}</span>
+          사용자: <span id="userName">{"나"}</span>
         </p>
         <p>
-          자산: $<span id="userAssets">{user.money}</span>
+          자산: $<span id="userAssets">{userMoney}</span>
         </p>
         <p id="betExplanation">{explanation}</p>
         <input
