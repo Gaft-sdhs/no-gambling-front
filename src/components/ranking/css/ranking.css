@@ -12,3 +12,10 @@
 
   flex-direction: column;
 }
+
+@media (max-width: 600px) {
+  .ranking {
+    width: 23rem;
+    height: 29.5rem;
+  }
+}

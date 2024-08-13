@@ -86,7 +86,6 @@ const Snail = () => {
         alert(`${winner} 달팽이가 이겼습니다!`);
         handleBetResult(winner);
         resetRace();
-        console.log(changeLostCountHandler);
         changeLostCountHandler();
       }, 8000);
     }
