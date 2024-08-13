@@ -38,6 +38,11 @@
   height: 5vw;
 }
 
+.snail > img {
+  width: 7vw;
+  height: 4vw;
+}
+
 .button-container {
   border-radius: 30px;
   display: flex;
@@ -98,7 +103,7 @@
 /* 미디어 쿼리: 작은 화면 대응 */
 @media (max-width: 1000px) {
   .race-track {
-    width: 90vw; /* 작은 화면에서 너비를 90vw로 조정 */
+    width: 95vw; /* 작은 화면에서 너비를 90vw로 조정 */
     height: auto;
     max-width: 100vh; /* 최대 너비를 100vh로 설정 */
     max-height: 600px; /* 최대 높이를 600px로 설정 */
@@ -122,7 +127,8 @@
 
 @media (max-width: 600px) {
   .Snail > .container {
-    gap: 2vw;
+    gap: 4rem;
+    margin-top: 2rem;
   }
 
   .button-container {

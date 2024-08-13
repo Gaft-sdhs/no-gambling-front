@@ -208,3 +208,9 @@
 .tutorial-slide.active {
   display: block;
 }
+
+@media (max-width: 600px) {
+  .powerball {
+    gap: 4rem;
+  }
+}
