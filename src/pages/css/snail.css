@@ -38,11 +38,6 @@
   height: 5vw;
 }
 
-.snail > img {
-  width: 7vw;
-  height: 4vw;
-}
-
 .button-container {
   border-radius: 30px;
   display: flex;
@@ -133,5 +128,10 @@
 
   .button-container {
     padding: 0 5vw;
+  }
+
+  .snail > img {
+    width: 7vw;
+    height: 4vw;
   }
 }
