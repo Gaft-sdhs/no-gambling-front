@@ -11,7 +11,6 @@ import { LostCountContext } from "../../App.jsx";
 const LadderGame = () => {
   const [result, setResult] = useState(null);
   const [resetKey, setResetKey] = useState(0);
-  const [animationFinished, setAnimationFinished] = useState(false);
   const [selected, setSelected] = useState(null);
   const [startSide, setStartSide] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
@@ -19,7 +18,6 @@ const LadderGame = () => {
     name: "사용자 이름",
     money: parseInt(localStorage.getItem("userAssets")) || 100,
   });
-  const [showResult, setShowResult] = useState(false);
   const [betPlaced, setBetPlaced] = useState(false);
   const [gameCount, setGameCount] = useState(0);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
@@ -51,14 +49,8 @@ const LadderGame = () => {
 
     setResult(randomResult);
     setGameStarted(true);
-    setAnimationFinished(false);
     setBetPlaced(true);
     setButtonsDisabled(true);
-
-    setTimeout(() => {
-      setAnimationFinished(true);
-      setShowResult(true);
-    }, 2000);
 
     setTimeout(() => {
       setButtonsDisabled(false);
@@ -71,7 +63,6 @@ const LadderGame = () => {
     setStartSide("");
     setGameStarted(false);
     setResetKey((prevKey) => prevKey + 1);
-    setShowResult(false);
     setBetPlaced(false);
     setGameCount((prevCount) => prevCount + 1);
   };
@@ -102,7 +93,6 @@ const LadderGame = () => {
     }
 
     setResult(randomResult);
-    setAnimationFinished(true);
     setBetPlaced(true);
 
     setTimeout(() => {
