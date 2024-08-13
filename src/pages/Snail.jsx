@@ -190,7 +190,7 @@ const Snail = () => {
               <button
                 className="start-button"
                 onClick={startRace}
-                disabled={isRacing}
+                disabled={isRacing || !hasBet}
               >
                 Start Race
               </button>
