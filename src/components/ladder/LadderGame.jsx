@@ -169,18 +169,6 @@ const LadderGame = () => {
           게임 시작
         </button>
       </div>
-      {result && animationFinished && showResult && (
-        <div className="result-alert">
-          {result === selected ? (
-            <p className="result-text">축하합니다! {result} 입니다.</p>
-          ) : (
-            <p className="result-text">아쉽게도 정답은 {result} 이였습니다.</p>
-          )}
-          <button onClick={handleResetGame} className="result-reset-button">
-            게임 다시하기
-          </button>
-        </div>
-      )}
       {selected !== null && !gameStarted && (
         <LadderBetModal
           user={user}
