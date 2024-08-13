@@ -27,7 +27,7 @@ const Snail = () => {
   const [raceCount, setRaceCount] = useState(0);
   const [user, setUser] = useState({
     name: "사용자 이름",
-    money: parseInt(localStorage.getItem("userAssets")) || 100,
+    money: 0,
   });
   const [betData, setBetData] = useState(null);
   const [hasBet, setHasBet] = useState(false); // 추가된 상태
@@ -35,7 +35,7 @@ const Snail = () => {
   const changeLostCountHandler = useContext(LostCountContext);
 
   useEffect(() => {
-    const storedMoney = parseInt(localStorage.getItem("userAssets"));
+    const storedMoney = parseInt(localStorage.getItem("₩Assets"));
     if (storedMoney) {
       setUser((prevUser) => ({ ...prevUser, money: storedMoney }));
     }
