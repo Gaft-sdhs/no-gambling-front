@@ -12,6 +12,7 @@ export const LostCountContext = createContext();
 function App() {
   const [showModal, setShowModal] = useState(false);
   const [lostCount, setLostCount] = useState(0);
+  const [raceCount, setRaceCount] = useState(0);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -36,7 +37,12 @@ function App() {
       <LostCountContext.Provider value={changeLostCountHandler}>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/snail" element={<Snail />} />
+          <Route
+            path="/snail"
+            element={
+              <Snail raceCount={raceCount} setRaceCount={setRaceCount} />
+            }
+          />
           <Route path="/ladder" element={<Ladder />} />
           <Route path="/powerball" element={<PowerBall />} />
           <Route path="*" element={<Navigate to="/" />} />
