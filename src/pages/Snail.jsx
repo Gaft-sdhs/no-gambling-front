@@ -15,16 +15,14 @@ import { LostCountContext } from "../App";
 
 const snailImages = [snailImage1, snailImage2, snailImage3];
 
-const Snail = () => {
+const Snail = ({ raceCount, setRaceCount }) => {
   const [showBetModal, setShowBetModal] = useState(false);
   const [selectedSnail, setSelectedSnail] = useState(null);
   const [snails] = useState(["1", "2", "3"]);
   const [positions, setPositions] = useState([14, 14, 14]);
   const [isRacing, setIsRacing] = useState(false);
   const [speeds, setSpeeds] = useState([0, 0, 0]);
-  const [intervalId, setIntervalId] = useState(null);
   const [selectedVote, setSelectedVote] = useState(null);
-  const [raceCount, setRaceCount] = useState(0);
   const [userMoney, setUserMoney] = useState(0);
   const [betData, setBetData] = useState(null);
   const [hasBet, setHasBet] = useState(false); // 추가된 상태
@@ -33,6 +31,7 @@ const Snail = () => {
 
   useEffect(() => {
     const storedMoney = parseInt(localStorage.getItem("userAssets"));
+
     if (storedMoney) {
       setUserMoney(storedMoney);
     }
@@ -41,33 +40,37 @@ const Snail = () => {
   const getRandomSpeed = () => Math.random() * 4 + 4;
 
   const startRace = () => {
-    setRaceCount((prevCount) => prevCount + 1); // 레이스 카운트 증가
+    setRaceCount(raceCount + 1); // 레이스 카운트 증가
+
     let newSpeeds;
+
+    newSpeeds = snails.map(() => getRandomSpeed());
+
     if (raceCount >= 2 && selectedSnail !== null) {
-      // 세 번째 레이스부터는 사용자가 선택한 달팽이의 속도를 1로 설정
-      newSpeeds = snails.map((_, index) =>
-        index === selectedSnail ? 10 : getRandomSpeed()
-      );
+      let lowestSpeed = Math.max(...newSpeeds);
+
+      // console.log(lowestSpeed);
+
+      newSpeeds[selectedSnail] = Number(lowestSpeed) + 0.3;
     } else {
-      newSpeeds = snails.map(() => getRandomSpeed());
+      let highestSpeed = Math.min(...newSpeeds);
+
+      // console.log(highestSpeed);
+
+      newSpeeds[selectedSnail] = Number(highestSpeed) - 0.3;
     }
+
     setSpeeds(newSpeeds);
+
+    // console.log(snails);
+    // console.log(speeds);
+    // console.log(newSpeeds);
+    // console.log(selectedSnail);
+
     setIsRacing(true);
+
     setPositions([14, 14, 14]);
     setHasBet(false); // 레이스 시작 시 배팅 상태 초기화
-
-    const id = setInterval(() => {
-      let updatedSpeeds;
-      if (raceCount >= 2 && selectedSnail !== null) {
-        updatedSpeeds = snails.map((_, index) =>
-          index === selectedSnail ? 1 : getRandomSpeed()
-        );
-      } else {
-        updatedSpeeds = snails.map(() => getRandomSpeed());
-      }
-      setSpeeds(updatedSpeeds);
-    }, 1000);
-    setIntervalId(id);
 
     setTimeout(() => {
       setPositions([80, 80, 80]);
@@ -76,8 +79,8 @@ const Snail = () => {
 
   useEffect(() => {
     if (positions.every((position) => position === 80)) {
-      clearInterval(intervalId);
       const winner = snails[speeds.indexOf(Math.min(...speeds))];
+
       setTimeout(() => {
         alert(`${winner} 달팽이가 이겼습니다!`);
         handleBetResult(winner);
@@ -85,14 +88,7 @@ const Snail = () => {
         changeLostCountHandler();
       }, 8000);
     }
-  }, [
-    handleBetResult,
-    changeLostCountHandler,
-    intervalId,
-    positions,
-    snails,
-    speeds,
-  ]);
+  }, [handleBetResult, changeLostCountHandler, positions, snails, speeds]);
 
   const resetRace = () => {
     setPositions([14, 14, 14]);
@@ -126,6 +122,7 @@ const Snail = () => {
         if (betData.snailIndex === parseInt(winner) - 1) {
           const newMoney = userMoney + betData.amount * 2;
           setUserMoney(newMoney);
+
           localStorage.setItem("userAssets", newMoney);
         }
         setBetData(null);
