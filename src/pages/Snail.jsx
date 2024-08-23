@@ -46,7 +46,7 @@ const Snail = ({ raceCount, setRaceCount }) => {
 
     newSpeeds = snails.map(() => getRandomSpeed());
 
-    if (raceCount >= 2 && selectedSnail !== null) {
+    if (raceCount >= 3 && selectedSnail !== null) {
       let lowestSpeed = Math.max(...newSpeeds);
 
       // console.log(lowestSpeed);

@@ -180,14 +180,14 @@
 .modal-content button {
   color: black;
 }
-.close {
+.modal-content .close {
   color: #aaa;
   float: right;
   font-size: 1.5rem;
   font-weight: bold;
 }
-.close:hover,
-.close:focus {
+.modal-content .close:hover,
+.modal-content .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
